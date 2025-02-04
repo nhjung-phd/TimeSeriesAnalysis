@@ -95,7 +95,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
    ```bash
    python -m venv venv
    source venv/bin/activate  # Mac/Linux
-   venv\Scriptsctivate  # Windows
+   venv\Scripts\activate  # Windows
    ```
 3. 필수 패키지 설치  
    ```bash
