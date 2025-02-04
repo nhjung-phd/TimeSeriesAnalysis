@@ -74,13 +74,14 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ---
 
 ## 📌 실습 목록  
-| 📌 실습 주제 | 📂 코드 파일 | 🏷️ 설명 |
-|-------------|------------|-----------|
-| **1. 시계열 데이터 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 |
-| **2. 선형 회귀 기반 예측** | `notebooks/02_linear_regression.ipynb` | 시계열 데이터를 이용한 회귀 분석 |
-| **3. ARIMA 모델 예측** | `notebooks/03_arima_forecasting.ipynb` | ARIMA 모델을 이용한 시계열 예측 |
-| **4. LSTM 기반 딥러닝 예측** | `notebooks/04_lstm_forecasting.ipynb` | LSTM을 활용한 금융 데이터 예측 |
-| **5. Transformer 기반 최신 모델** | `notebooks/05_transformer_forecasting.ipynb` | 최신 AI 모델을 활용한 시계열 분석 |
+| 📌 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+|-------------|------------|-----------|----------|
+| **1. 시계열 데이터 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_data_preprocessing.ipynb) |
+| **2. 선형 회귀 기반 예측** | `notebooks/02_linear_regression.ipynb` | 시계열 데이터를 이용한 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_linear_regression.ipynb) |
+| **3. ARIMA 모델 예측** | `notebooks/03_arima_forecasting.ipynb` | ARIMA 모델을 이용한 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_arima_forecasting.ipynb) |
+| **4. LSTM 기반 딥러닝 예측** | `notebooks/04_lstm_forecasting.ipynb` | LSTM을 활용한 금융 데이터 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_lstm_forecasting.ipynb) |
+| **5. Transformer 기반 최신 모델** | `notebooks/05_transformer_forecasting.ipynb` | 최신 AI 모델을 활용한 시계열 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_transformer_forecasting.ipynb) |
+
 
 ---
 
