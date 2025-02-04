@@ -42,7 +42,7 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 👥 **약 20명 예정**  
 
 ---  
-✅ 본 강의는 **시계열 분석(Time Series Analysis)**에 대한 심층적인 이해와 실습을 목표로 합니다.  
+✅ 본 강의는 **시계열 분석(Time Series Analysis)** 에 대한 심층적인 이해와 실습을 목표로 합니다.  
 ✅ Python을 활용한 시계열 데이터 분석, 머신러닝 및 딥러닝 기반 예측 모델을 다룹니다.  
 
 📌 **강의 및 실습 자료는 GitHub을 통해 제공될 예정입니다.** 🚀  
@@ -139,7 +139,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ---
 
-👨‍🏫 **Instructor: 정낙현 박사 (Nak Hyun Jung)**  
+👨‍🏫 **Instructor: 정낙현 박사 (Jung, Nak Hyun)**  
 📧 Email: nhjung.phd@gmail.com
 🚀 Created for aSSIST AI·Big Data Master’s Program  
 
