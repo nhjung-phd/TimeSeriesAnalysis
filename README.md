@@ -88,7 +88,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ### **1️⃣ Jupyter Notebook에서 실행**
 1. GitHub 저장소 클론 (로컬에 다운로드)  
    ```bash
-   git clone https://github.com/your-repo-name/time-series-analysis.git
+   git clone https://github.com/nhjung-phd/time-series-analysis.git
    cd time-series-analysis
    ```
 2. 가상환경 생성 (선택 사항)  
@@ -110,7 +110,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ### **2️⃣ Google Colab에서 실행**
 💡 **Colab 링크를 클릭하면 바로 실행할 수 있습니다.**  
-🔗 [Google Colab 실습 링크](https://colab.research.google.com/github/your-repo-name/time-series-analysis)  
+🔗 [Google Colab 실습 링크](https://colab.research.google.com/github/nhjung-phd/time-series-analysis)  
 
 ---
 
