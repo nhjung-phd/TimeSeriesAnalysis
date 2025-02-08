@@ -83,7 +83,6 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | **4. LSTM 기반 딥러닝 예측** | `notebooks/04_lstm_forecasting.ipynb` | LSTM을 활용한 금융 데이터 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_lstm_forecasting.ipynb) |
 | **5. Transformer 기반 최신 모델** | `notebooks/05_transformer_forecasting.ipynb` | 최신 AI 모델을 활용한 시계열 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_transformer_forecasting.ipynb) |
 
-
 ---
 
 ## 📌 코드 실행 방법
