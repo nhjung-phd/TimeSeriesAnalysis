@@ -5,7 +5,7 @@
 
 📄 **Box, G. E., Jenkins, G. M., Reinsel, G. C., & Ljung, G. M. (2015).**  
 🔹 *Time Series Analysis: Forecasting and Control*  
-📌 시계열 분석에서 가장 중요한 개념 중 하나인 Box-Jenkins 방법론(ARIMA 모델의 기반) 을 정립한 연구  
+📌 시계열 분석에서 가장 중요한 개념 중 하나인 Box-Jenkins 방법론(ARIMA 모델의 기반)을 정립한 연구  
 🔗 [DOI: 10.1002/9781118619193](https://doi.org/10.1002/9781118619193)  
 
 📄 **Hamilton, J. D. (1994).**  
@@ -34,6 +34,11 @@
 📌 응용 시계열 분석 개념과 예측 기법 소개  
 🔗 [DOI: 10.1017/9781108525312](https://doi.org/10.1017/9781108525312)  
 
+📄 **Shumway, R. H., & Stoffer, D. S. (2017).**  
+🔹 *Time Series Analysis and Its Applications*  
+📌 시계열 분석의 이론과 응용을 종합적으로 다룬 연구서  
+🔗 [Book Link](https://www.springer.com/gp/book/9783319524511)  
+
 ---
 
 ### **2️⃣ 머신러닝 및 딥러닝 기반 시계열 예측**  
@@ -58,8 +63,13 @@
 
 📄 **Zerveas, G., et al. (2021).**  
 🔹 *A Transformer-based Framework for Multivariate Time Series Representation Learning*  
-📌 다변량 시계열(multivariate time series) 을 Transformer로 모델링하는 방법을 제안  
+📌 다변량 시계열(multivariate time series)을 Transformer로 모델링하는 방법을 제안  
 🔗 [Paper](https://arxiv.org/abs/2010.02803)  
+
+📄 **Brownlee, J. (2020).**  
+🔹 *Deep Learning for Time Series Forecasting*  
+📌 딥러닝을 활용한 시계열 분석 개요 및 기법 소개  
+🔗 [Book Link](https://machinelearningmastery.com/deep-learning-for-time-series-forecasting/)  
 
 ---
 
@@ -83,11 +93,7 @@
 📌 딥러닝을 활용한 시계열 분포 예측을 제안  
 🔗 [Paper](https://arxiv.org/abs/1704.04110)  
 
-📄 **Brownlee, J. (2020).**  
-🔹 *Deep Learning for Time Series Forecasting*  
-📌 딥러닝을 활용한 시계열 분석 개요 및 기법 소개  
-🔗 [Book Link](https://machinelearningmastery.com/deep-learning-for-time-series-forecasting/)  
-
 ---
+
 
 논문은 계속 추가중 👍
