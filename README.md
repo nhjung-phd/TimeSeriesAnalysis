@@ -10,7 +10,7 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 ---
 
 # 📌 강의 개요  
-## 📌 2025년 3월 AI·빅데이터 석사(재학생반)  
+## 🤓 2025년 3월 AI·빅데이터 석사(재학생반)  
 
 ## 📖 과목명: **모듈3 Time Series Analysis**  
 
@@ -50,7 +50,7 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 
 ---
 
-## 📌 실습 환경 설정  
+## ⚙️ 실습 환경 설정  
 
 ### 🔧 **필수 라이브러리 설치**  
 실습을 위해 아래 패키지를 설치해야 합니다.  
@@ -61,7 +61,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ---
 
-## 📌 실습 내용 및 코드 실행 방법  
+## 🛠 실습 내용 및 코드 실행 방법  
 ### **📂 폴더 구조**
 ```bash
 📂 time-series-analysis
@@ -72,20 +72,20 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 │── requirements.txt            # 패키지 설치 파일
 ```
 
-### 📌 실습1 목록  
-|  실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+### 🗂 실습1 목록  
+| 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **1. 시계열 데이터 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_data_preprocessing.ipynb) |
 
-### 📌 실습2 목록  
-| 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+### 🗂 실습2 목록  
+| 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **1. 선형 회귀 기반 예측** | `notebooks/02_linear_regression.ipynb` | 단순 선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_linear_regression.ipynb) |
 | **2. 다중선형 회귀 기반 예측** | `notebooks/03_multi_linear_regression.ipynb` | 다중선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_multi_linear_regression.ipynb) |
 | **3. 다항 회귀 기반 예측** | `notebooks/04_Polynomial_Regression.ipynb` | 다항 회귀(Polynomial Regression) 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_Polynomial_Regression.ipynb) |
 
-### 📌 실습3 목록  
-| 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+### 🗂 실습3 목록  
+| 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **1. ANN 기반 예측** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
 | **2. RNN 기반 예측** | `notebooks/06_rnn_forecasting.ipynb` | RNN(순환신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_rnn_forecasting.ipynb) |
@@ -100,7 +100,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 🔹 **새로운 탭에서 열려면** `Ctrl + 클릭 (Windows/Linux)` 또는 `Cmd + 클릭 (Mac)`을 사용하세요!  
 
 
-## 📌 코드 실행 방법
+## 📟 코드 실행 방법
 ### **1️⃣ Jupyter Notebook에서 실행**
 1. GitHub 저장소 클론 (로컬에 다운로드)  
    ```bash
@@ -131,17 +131,17 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 🔗 [Google Colab 사용 가이드](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/colab.md)
 
 
-## 📌 데이터셋 다운로드  
+## 📖 데이터셋 다운로드  
 본 실습에서는 **테슬라(TSLA) 주가 데이터**를 사용하여 시계열 예측을 수행합니다.  
 실제 금융 데이터를 활용하여 딥러닝 기반 예측 모델을 학습하는 과정을 실습할 수 있습니다.  
 
-### 📌 **데이터 출처 및 사용 방법**
+### 📖 **데이터 출처 및 사용 방법**
 - 📊 **데이터 출처**: Yahoo Finance API (`yfinance` 라이브러리 사용)
 - 🕒 **사용 데이터**: 2022년 1월 1일부터 2024년 1월 1일까지의 테슬라(TSLA) 종가 데이터
 - 🏷 **예측 목표**: 과거 데이터를 바탕으로 미래 주가 변동을 예측
 
 
-### 📌 **Google Colab 사용 시 주의사항**
+### 📖 **Google Colab 사용 시 주의사항**
 - Google Colab을 사용하는 경우, 아래 명령어를 실행하여 `yfinance` 패키지를 설치해야 합니다.  
 
   ```python
@@ -149,7 +149,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 
-### 📌 **데이터 다운로드 및 저장**
+### 📖 **데이터 다운로드 및 저장**
 - `data/` 폴더에 기본적인 샘플 데이터를 포함하고 있습니다.
 - 직접 최신 데이터를 가져오려면 `yfinance` 라이브러리를 활용하여 다운로드할 수 있습니다.
   ```python
@@ -159,7 +159,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 
-### 📌 **주의사항**
+### 📢 **주의사항**
 
 - 📘 금융 데이터 변동성
 금융 데이터는 시장 상황에 따라 변동될 수 있으며, 실행 시점에 따라 데이터 값이 달라질 수 있습니다.
@@ -168,12 +168,12 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 본 실습은 연구 및 교육 목적으로 제공되며, 실제 투자 결정을 위한 금융 자문으로 사용할 수 없습니다.
 
 
-### 📌 기여 방법 (Contributing)
+### 🎯 기여 방법 (Contributing)
 1. 이 프로젝트에 기여하고 싶다면, 저장소를 `fork`한 후 `pull request`를 보내주세요.
 2. 제안 사항이나 오류 수정은 `Issues` 탭을 이용해주세요.
 
 
-### 📌 참고 자료 (References)
+### 📖 참고 자료 (References)
 - 📘 **"Time Series Analysis and Its Applications"**, Shumway & Stoffer (2017)
 - 📘 **"Deep Learning for Time Series Forecasting"**, Jason Brownlee (2020)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
@@ -182,7 +182,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ---
 
-### 📌 License
+### 📝 License
 이 프로젝트는 MIT License 하에 배포됩니다.
 
 ✅ 자유로운 사용: 개인 및 상업적 용도로 자유롭게 사용할 수 있습니다.
