@@ -95,7 +95,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | **6. Transformer Encoder 기반 예측** | `notebooks/10_transformer_encoder.ipynb` | Transformer Encoder 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/10_transformer_encoder.ipynb) |
 
 
----
+
 🔹 **Colab 실행 버튼을 클릭하면 같은 창에서 열립니다.**  
 🔹 **새로운 탭에서 열려면** `Ctrl + 클릭 (Windows/Linux)` 또는 `Cmd + 클릭 (Mac)`을 사용하세요!  
 
@@ -123,7 +123,6 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
    jupyter notebook
    ```
 
----
 
 ### **2️⃣ Google Colab에서 실행**
 💡 **Colab 링크를 클릭하면 바로 실행할 수 있습니다.**  
@@ -143,7 +142,6 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 - 🕒 **사용 데이터**: 2022년 1월 1일부터 2024년 1월 1일까지의 테슬라(TSLA) 종가 데이터
 - 🏷 **예측 목표**: 과거 데이터를 바탕으로 미래 주가 변동을 예측
 
----
 
 ### 📌 **Google Colab 사용 시 주의사항**
 - Google Colab을 사용하는 경우, 아래 명령어를 실행하여 `yfinance` 패키지를 설치해야 합니다.  
@@ -152,7 +150,6 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
   !pip install yfinance
 
 
----
 
 ### 📌 **데이터 다운로드 및 저장**
 - `data/` 폴더에 기본적인 샘플 데이터를 포함하고 있습니다.
@@ -163,7 +160,6 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
   df.to_csv("data/tesla_stock.csv")
 
 
----
 
 ### 📌 **주의사항**
 
