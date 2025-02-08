@@ -89,6 +89,9 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 |-------------|------------|-----------|----------|
 | **1. ANN 기반 예측** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
 | **2. RNN 기반 예측** | `notebooks/06_rnn_forecasting.ipynb` | RNN(순환신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_rnn_forecasting.ipynb) |
+| **3. LSTM 기반 예측** | `notebooks/07_lstm_forecasting.ipynb` | LSTM(Long Short-Term Memory) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/07_lstm_forecasting.ipynb) |
+| **4. GRU 기반 예측** | `notebooks/08_gru_forecasting.ipynb` | GRU(Gated Recurrent Unit) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/08_gru_forecasting.ipynb) |
+| **5. CNN 기반 예측** | `notebooks/09_cnn_forecasting.ipynb` | CNN(Convolutional Neural Network) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/09_cnn_forecasting.ipynb) |
 
 ---
 🔹 **Colab 실행 버튼을 클릭하면 같은 창에서 열립니다.**  
