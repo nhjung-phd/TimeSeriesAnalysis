@@ -75,24 +75,24 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ### 🗂 실습1 목록  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **1. 시계열 데이터 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_data_preprocessing.ipynb) |
+| **1. 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_data_preprocessing.ipynb) |
 
 ### 🗂 실습2 목록  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **1. 선형 회귀 기반 예측** | `notebooks/02_linear_regression.ipynb` | 단순 선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_linear_regression.ipynb) |
-| **2. 다중선형 회귀 기반 예측** | `notebooks/03_multi_linear_regression.ipynb` | 다중선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_multi_linear_regression.ipynb) |
-| **3. 다항 회귀 기반 예측** | `notebooks/04_Polynomial_Regression.ipynb` | 다항 회귀(Polynomial Regression) 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_Polynomial_Regression.ipynb) |
+| **1. 단순선형회귀** | `notebooks/02_linear_regression.ipynb` | 단순 선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_linear_regression.ipynb) |
+| **2. 다중선형회귀** | `notebooks/03_multi_linear_regression.ipynb` | 다중선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_multi_linear_regression.ipynb) |
+| **3. 다항회귀** | `notebooks/04_Polynomial_Regression.ipynb` | 다항 회귀(Polynomial Regression) 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_Polynomial_Regression.ipynb) |
 
 ### 🗂 실습3 목록  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **1. ANN 기반 예측** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
-| **2. RNN 기반 예측** | `notebooks/06_rnn_forecasting.ipynb` | RNN(순환신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_rnn_forecasting.ipynb) |
-| **3. LSTM 기반 예측** | `notebooks/07_lstm_forecasting.ipynb` | LSTM(Long Short-Term Memory) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/07_lstm_forecasting.ipynb) |
-| **4. GRU 기반 예측** | `notebooks/08_gru_forecasting.ipynb` | GRU(Gated Recurrent Unit) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/08_gru_forecasting.ipynb) |
-| **5. CNN 기반 예측** | `notebooks/09_cnn_forecasting.ipynb` | CNN(Convolutional Neural Network) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/09_cnn_forecasting.ipynb) |
-| **6. Transformer Encoder 기반 예측** | `notebooks/10_transformer_encoder.ipynb` | Transformer Encoder 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/10_transformer_encoder.ipynb) |
+| **1. ANN(MLP)** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
+| **2. RNN** | `notebooks/06_rnn_forecasting.ipynb` | RNN(순환신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_rnn_forecasting.ipynb) |
+| **3. LSTM** | `notebooks/07_lstm_forecasting.ipynb` | LSTM(Long Short-Term Memory) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/07_lstm_forecasting.ipynb) |
+| **4. GRU** | `notebooks/08_gru_forecasting.ipynb` | GRU(Gated Recurrent Unit) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/08_gru_forecasting.ipynb) |
+| **5. CNN** | `notebooks/09_cnn_forecasting.ipynb` | CNN(Convolutional Neural Network) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/09_cnn_forecasting.ipynb) |
+| **6. Transformer** | `notebooks/10_transformer_encoder.ipynb` | Transformer Encoder 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/10_transformer_encoder.ipynb) |
 
 
 
