@@ -1,7 +1,7 @@
 # TimeSeriesAnalysis
-Time Series Analysis
+## Time Series Analysis
 
-# 🕒 Time Series Analysis with Python  
+## 🕒 Time Series Analysis with Python  
 🚀 **2025년 aSSIST AI·Big Data 석사과정 강의 실습 자료**  
 
 이 저장소는 **"Time Series Analysis (시계열 분석)"** 강의의 실습 자료를 포함하고 있으며,  
@@ -9,10 +9,10 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 
 ---
 
-# 📌 강의 개요  
-## 🤓 2025년 3월 AI·빅데이터 석사(재학생반)  
+## 📌 강의 개요  
+### 🤓 2025년 3월 AI·빅데이터 석사(재학생반)  
 
-## 📖 과목명: **모듈3 Time Series Analysis**  
+### 📖 과목명: **모듈3 Time Series Analysis**  
 
 ### 📆 강의 기간  
 🗓 **2025년 4월 5일(토) ~ 2025년 4월 18일(금)**  
@@ -173,7 +173,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 2. 제안 사항이나 오류 수정은 `Issues` 탭을 이용해주세요.
 
 
-### 📖 참고 자료 (References)
+## 📖 참고 자료 (References)
 - 🔗 [학술 저널](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/Journals.md)
 - 🔗 [참고 문헌](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/References.md)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
