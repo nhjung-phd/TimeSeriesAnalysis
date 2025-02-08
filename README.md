@@ -1,7 +1,6 @@
 # TimeSeriesAnalysis
-## Time Series Analysis
+## 🕒 Time Series Analysis with Python 
 
-## 🕒 Time Series Analysis with Python  
 🚀 **2025년 aSSIST AI·Big Data 석사과정 강의 실습 자료**  
 
 이 저장소는 **"Time Series Analysis (시계열 분석)"** 강의의 실습 자료를 포함하고 있으며,  
