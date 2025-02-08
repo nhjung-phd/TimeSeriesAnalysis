@@ -167,10 +167,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ### 📌 **주의사항**
 
-📌 금융 데이터 변동성
+- 📘 금융 데이터 변동성
 금융 데이터는 시장 상황에 따라 변동될 수 있으며, 실행 시점에 따라 데이터 값이 달라질 수 있습니다.
 
-📌 연구 및 교육 목적
+- 📘 연구 및 교육 목적
 본 실습은 연구 및 교육 목적으로 제공되며, 실제 투자 결정을 위한 금융 자문으로 사용할 수 없습니다.
 
 --
@@ -187,11 +187,20 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 - 📘 **"Deep Learning for Time Series Forecasting"**, Jason Brownlee (2020)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
 - 🔗 [TensorFlow Time Series](https://www.tensorflow.org/tutorials/structured_data/time_series)
+- 🔗 [Scikit-Learn 공식 문서](https://scikit-learn.org/stable/)
 
 ---
 
 ## 📌 License
-이 프로젝트는 **MIT License** 하에 배포됩니다.
+이 프로젝트는 MIT License 하에 배포됩니다.
+
+✅ 자유로운 사용: 개인 및 상업적 용도로 자유롭게 사용할 수 있습니다.
+✅ 수정 및 배포 가능: 프로젝트를 자유롭게 수정하고, 배포하거나 상업적 목적으로 활용할 수 있습니다.
+✅ 공개 및 공유 가능: 변경한 버전을 다시 공개하거나 공유할 수 있습니다.
+
+❗ 단, 다음 조건을 따라야 합니다:
+🔹 저작권 표기 유지: 원본 프로젝트의 저작권 정보를 반드시 유지해야 합니다.
+🔹 책임 없음: 이 소프트웨어를 사용하여 발생하는 문제(예: 버그, 보안 문제 등)에 대해 원작자는 책임을 지지 않습니다.
 
 ---
 
