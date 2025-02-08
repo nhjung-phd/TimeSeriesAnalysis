@@ -174,8 +174,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 ### 📖 참고 자료 (References)
-- 📘 **"Time Series Analysis and Its Applications"**, Shumway & Stoffer (2017)
-- 📘 **"Deep Learning for Time Series Forecasting"**, Jason Brownlee (2020)
+- 🔗 [참고 문헌들](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/References.md)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
 - 🔗 [TensorFlow Time Series](https://www.tensorflow.org/tutorials/structured_data/time_series)
 - 🔗 [Scikit-Learn 공식 문서](https://scikit-learn.org/stable/)
