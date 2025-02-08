@@ -124,6 +124,9 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 💡 **Colab 링크를 클릭하면 바로 실행할 수 있습니다.**  
 🔗 [Google Colab 실습 링크](https://colab.research.google.com/github/nhjung-phd/time-series-analysis)  
 
+📄 **Colab 사용 가이드 문서**  
+🔗 [Google Colab 사용 가이드](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/colab.md)
+
 ---
 
 ## 📌 데이터셋 다운로드  
