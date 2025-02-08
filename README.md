@@ -9,8 +9,8 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 
 ---
 
-## 📌 강의 개요  
-# 📌 2025년 3월 AI·빅데이터 석사(재학생반)  
+# 📌 강의 개요  
+## 📌 2025년 3월 AI·빅데이터 석사(재학생반)  
 
 ## 📖 과목명: **모듈3 Time Series Analysis**  
 
@@ -72,19 +72,19 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ```
 
 ---
-## 📌 실습1 목록  
+### 📌 실습1 목록  
 | 📌 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **1. 시계열 데이터 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_data_preprocessing.ipynb) |
 
-## 📌 실습2 목록  
+### 📌 실습2 목록  
 | 📌 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **1. 선형 회귀 기반 예측** | `notebooks/02_linear_regression.ipynb` | 단순 선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_linear_regression.ipynb) |
 | **2. 다중선형 회귀 기반 예측** | `notebooks/03_multi_linear_regression.ipynb` | 다중선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_multi_linear_regression.ipynb) |
 | **3. 다항 회귀 기반 예측** | `notebooks/04_Polynomial_Regression.ipynb` | 다항 회귀(Polynomial Regression) 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_Polynomial_Regression.ipynb) |
 
-## 📌 실습3 목록  
+### 📌 실습3 목록  
 | 📌 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **1. ANN 기반 예측** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
@@ -169,16 +169,13 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 - 📘 연구 및 교육 목적
 본 실습은 연구 및 교육 목적으로 제공되며, 실제 투자 결정을 위한 금융 자문으로 사용할 수 없습니다.
 
----
-
 
 ### 📌 기여 방법 (Contributing)
 1. 이 프로젝트에 기여하고 싶다면, 저장소를 `fork`한 후 `pull request`를 보내주세요.
 2. 제안 사항이나 오류 수정은 `Issues` 탭을 이용해주세요.
 
----
 
-## 📌 참고 자료 (References)
+### 📌 참고 자료 (References)
 - 📘 **"Time Series Analysis and Its Applications"**, Shumway & Stoffer (2017)
 - 📘 **"Deep Learning for Time Series Forecasting"**, Jason Brownlee (2020)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
@@ -187,7 +184,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ---
 
-## 📌 License
+### 📌 License
 이 프로젝트는 MIT License 하에 배포됩니다.
 
 ✅ 자유로운 사용: 개인 및 상업적 용도로 자유롭게 사용할 수 있습니다.
