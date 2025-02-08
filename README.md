@@ -183,7 +183,9 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ---
 
 👨‍🏫 **Instructor: 정낙현 박사 (Dr. Jung, Nak Hyun)**  
+
 📧 Email: nhjung.phd@gmail.com
+
 🚀 Created for aSSIST AI·Big Data Master’s Program  
 
 
