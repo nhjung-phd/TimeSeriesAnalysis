@@ -87,8 +87,8 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ## 📌 실습3 목록  
 | 📌 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **3. ANN 기반 예측** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
-
+| **1. ANN 기반 예측** | `notebooks/05_ann_forecasting.ipynb` | ANN(인공신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
+| **2. RNN 기반 예측** | `notebooks/06_rnn_forecasting.ipynb` | RNN(순환신경망) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_rnn_forecasting.ipynb) |
 
 ---
 🔹 **Colab 실행 버튼을 클릭하면 같은 창에서 열립니다.**  
