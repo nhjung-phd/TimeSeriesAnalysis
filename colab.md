@@ -1,10 +1,10 @@
 아래는 **초보자를 위한 Google Colab 사용 방법**을 단계별로 정리한 **마크다운(Markdown) 문서**입니다. 이 문서를 `README.md` 또는 다른 `.md` 파일에 추가하면, GitHub에서도 쉽게 볼 수 있고, 사용자가 단계별로 학습할 수 있습니다.
 
-```md
 # 📌 Google Colab 사용 가이드 (초보자용)
 이 문서는 **Google Colab**을 처음 사용하는 사람들을 위해 단계별 설명을 제공합니다.  
 Google Colab은 웹 기반 Jupyter Notebook 환경으로, 파이썬 코드 실행 및 데이터 분석을 쉽게 할 수 있습니다.
 
+---
 
 ## 📌 1. Google Colab 시작하기
 ### ✅ Google Colab 접속
@@ -18,6 +18,7 @@ Google Colab은 웹 기반 Jupyter Notebook 환경으로, 파이썬 코드 실�
   ```
 - `YOUR_GITHUB_REPO`와 `YOUR_NOTEBOOK.ipynb`를 실제 GitHub 저장소 및 파일명으로 변경하세요.
 
+---
 
 ## 📌 2. Google Colab 기본 사용법
 ### ✅ 코드 셀 실행
