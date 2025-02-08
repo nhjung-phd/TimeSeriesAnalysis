@@ -133,8 +133,22 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ---
 
 ## 📌 데이터셋 다운로드  
-- 실습 데이터는 `data/` 폴더에 포함되어 있습니다.  
-- 필요한 경우, 금융 데이터 API(Yahoo Finance, Quandl)를 활용하여 데이터를 직접 수집할 수도 있습니다.
+본 실습에서는 **테슬라(TSLA) 주가 데이터**를 사용하여 시계열 예측을 수행합니다.  
+실제 금융 데이터를 활용하여 딥러닝 기반 예측 모델을 학습하는 과정을 실습할 수 있습니다.  
+
+### 📌 **데이터 출처 및 사용 방법**
+- 📊 **데이터 출처**: Yahoo Finance API (`yfinance` 라이브러리 사용)
+- 🕒 **사용 데이터**: 2022년 1월 1일부터 2024년 1월 1일까지의 테슬라(TSLA) 종가 데이터
+- 🏷 **예측 목표**: 과거 데이터를 바탕으로 미래 주가 변동을 예측
+
+### 📌 **데이터 다운로드 및 저장**
+- `data/` 폴더에 기본적인 샘플 데이터를 포함하고 있습니다.
+- 직접 최신 데이터를 가져오려면 `yfinance` 라이브러리를 활용하여 다운로드할 수 있습니다.
+  ```python
+  import yfinance as yf
+  df = yf.download("TSLA", start="2022-01-01", end="2024-01-01")
+  df.to_csv("data/tesla_stock.csv")
+
 
 ---
 
