@@ -173,10 +173,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 - 📘 연구 및 교육 목적
 본 실습은 연구 및 교육 목적으로 제공되며, 실제 투자 결정을 위한 금융 자문으로 사용할 수 없습니다.
 
---
+---
 
 
-## 📌 기여 방법 (Contributing)
+### 📌 기여 방법 (Contributing)
 1. 이 프로젝트에 기여하고 싶다면, 저장소를 `fork`한 후 `pull request`를 보내주세요.
 2. 제안 사항이나 오류 수정은 `Issues` 탭을 이용해주세요.
 
