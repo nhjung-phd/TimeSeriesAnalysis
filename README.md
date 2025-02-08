@@ -174,7 +174,8 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 ### 📖 참고 자료 (References)
-- 🔗 [참고 문헌들](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/References.md)
+- 🔗 [학술 저널](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/Journals.md)
+- 🔗 [참고 문헌](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/References.md)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
 - 🔗 [TensorFlow Time Series](https://www.tensorflow.org/tutorials/structured_data/time_series)
 - 🔗 [Scikit-Learn 공식 문서](https://scikit-learn.org/stable/)
