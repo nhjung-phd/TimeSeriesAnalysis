@@ -18,6 +18,7 @@
 📌 ARIMA, ETS(지수평활법), 상태공간 모델(State-Space Models) 등의 실전 적용법을 설명  
 📌 R 패키지 `forecast`의 개발자인 Rob Hyndman 교수의 연구  
 🔗 [Online Free Book](https://otexts.com/fpp3/)  
+🔗 [Online Free Book(한국어)](https://otexts.com/fppkr/)
 
 📄 **Brockwell, P. J., & Davis, R. A. (2016).**  
 🔹 *Introduction to Time Series and Forecasting*  
