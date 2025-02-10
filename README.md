@@ -67,33 +67,46 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 │── requirements.txt            # 패키지 설치 파일
 ```
 
-### 🗂 실습1 목록  
+## 🗂 실습 00: 데이터 전처리  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **1. 전처리** | `notebooks/01_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_data_preprocessing.ipynb) |
+| **데이터 전처리** | `notebooks/00_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) |
 
-### 🗂 실습2 목록  
+
+## 🗂 실습 01~04: 시계열 예측 (고전적 접근)  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **1. 단순선형회귀** | `notebooks/02_linear_regression.ipynb` | 단순선형회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_linear_regression.ipynb) |
-| **2. 다중선형회귀** | `notebooks/03_multi_linear_regression.ipynb` | 다중선형회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_multi_linear_regression.ipynb) |
-| **3. 다항회귀** | `notebooks/04_Polynomial_Regression.ipynb` | 다항회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_Polynomial_Regression.ipynb) |
+| **AR(자동회귀) 모델** | `notebooks/01_AR_forecasting.ipynb` | AR(Autoregressive) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_AR_forecasting.ipynb) |
+| **MA(이동 평균) 모델** | `notebooks/02_MA_forecasting.ipynb` | MA(Moving Average) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_MA_forecasting.ipynb) |
+| **ARMA(AR+MA) 모델** | `notebooks/03_ARMA_forecasting.ipynb` | ARMA(AR+MA 결합) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_ARMA_forecasting.ipynb) |
+| **ARIMA 모델** | `notebooks/04_ARIMA_forecasting.ipynb` | ARIMA(AutoRegressive Integrated Moving Average) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_ARIMA_forecasting.ipynb) |
 
-### 🗂 실습3 목록  
+
+## 🗂 실습 11~13: 회귀 기반 예측  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
-| **1. ANN(MLP)** | `notebooks/05_ann_forecasting.ipynb` | ANN(MLP) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_ann_forecasting.ipynb) |
-| **2. RNN** | `notebooks/06_rnn_forecasting.ipynb` | RNN 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_rnn_forecasting.ipynb) |
-| **3. LSTM** | `notebooks/07_lstm_forecasting.ipynb` | LSTM 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/07_lstm_forecasting.ipynb) |
-| **4. GRU** | `notebooks/08_gru_forecasting.ipynb` | GRU 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/08_gru_forecasting.ipynb) |
-| **5. CNN** | `notebooks/09_cnn_forecasting.ipynb` | CNN 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/09_cnn_forecasting.ipynb) |
-| **6. Transformer** | `notebooks/10_transformer_encoder.ipynb` | Transformer Encoder 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/10_transformer_encoder.ipynb) |
+| **단순 선형 회귀** | `notebooks/11_linear_regression.ipynb` | 단순 선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/11_linear_regression.ipynb) |
+| **다중 선형 회귀** | `notebooks/12_multi_linear_regression.ipynb` | 다중 선형 회귀 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/12_multi_linear_regression.ipynb) |
+| **다항 회귀** | `notebooks/13_Polynomial_Regression.ipynb` | 다항 회귀(Polynomial Regression) 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/13_Polynomial_Regression.ipynb) |
+
+
+## 🗂 실습 21~26: 머신러닝 & 딥러닝 기반 예측  
+| 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+|-------------|------------|-----------|----------|
+| **ANN(MLP) 기반 예측** | `notebooks/21_ann_forecasting.ipynb` | ANN(MLP) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/21_ann_forecasting.ipynb) |
+| **RNN 기반 예측** | `notebooks/22_rnn_forecasting.ipynb` | RNN 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/22_rnn_forecasting.ipynb) |
+| **LSTM 기반 예측** | `notebooks/23_lstm_forecasting.ipynb` | LSTM 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/23_lstm_forecasting.ipynb) |
+| **GRU 기반 예측** | `notebooks/24_gru_forecasting.ipynb` | GRU 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/24_gru_forecasting.ipynb) |
+| **CNN 기반 예측** | `notebooks/25_cnn_forecasting.ipynb` | CNN 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/25_cnn_forecasting.ipynb) |
+| **Transformer 기반 예측** | `notebooks/26_transformer_encoder.ipynb` | Transformer Encoder 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/26_transformer_encoder.ipynb) |
 
 
 
-🔹 **Colab 실행 버튼을 클릭하면 같은 창에서 열립니다.**  
-🔹 **새로운 탭에서 열려면** `Ctrl + 클릭 (Windows/Linux)` 또는 `Cmd + 클릭 (Mac)`을 사용하세요!  
+✔ **Colab 실행 버튼**이 포함되어 있어 클릭하면 바로 Google Colab에서 실행할 수 있습니다. 🚀
+✔ **Colab 실행 버튼을 클릭하면 같은 창에서 열립니다.**  
+✔ **새로운 탭에서 열려면** `Ctrl + 클릭 (Windows/Linux)` 또는 `Cmd + 클릭 (Mac)`을 사용하세요!  
 
+---
 
 ## 📟 코드 실행 방법
 ### **1️⃣ Jupyter Notebook에서 실행**
