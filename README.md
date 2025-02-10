@@ -39,7 +39,8 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 ### **📂 폴더 구조**
 ```bash
 📂 time-series-analysis
-│── 📂 data                    # 실습에 사용할 데이터셋
+│── 📂 doc                      # 공지사항
+│── 📂 data                     # 실습에 사용할 데이터셋
 │── 📂 notebooks                # Jupyter Notebook 실습 코드
 │── 📂 models                   # 저장된 모델 파일
 │── README.md                   # 초기 안내 파일
