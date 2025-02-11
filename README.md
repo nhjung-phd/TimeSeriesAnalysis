@@ -73,7 +73,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | **데이터 전처리** | `notebooks/00_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) |
 
 
-## 🗂 실습 01~04: 시계열 예측 (고전적 접근)  
+## 🗂 실습 01~06: 시계열 예측 (고전적 접근)  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
 | **AR(자동회귀) 모델** | `notebooks/01_AR_forecasting.ipynb` | AR(Autoregressive) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/01_AR_forecasting.ipynb) |
