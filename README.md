@@ -80,7 +80,19 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | **MA(이동 평균) 모델** | `notebooks/02_MA_forecasting.ipynb` | MA(Moving Average) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/02_MA_forecasting.ipynb) |
 | **ARMA(AR+MA) 모델** | `notebooks/03_ARMA_forecasting.ipynb` | ARMA(AR+MA 결합) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/03_ARMA_forecasting.ipynb) |
 | **ARIMA 모델** | `notebooks/04_ARIMA_forecasting.ipynb` | ARIMA(AutoRegressive Integrated Moving Average) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/04_ARIMA_forecasting.ipynb) |
+| **VAR(벡터 자기회귀) 모델** | `notebooks/05_VAR_forecasting.ipynb` | VAR(Vector Autoregression) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/05_VAR_forecasting.ipynb) |
+| **SVAR(구조적 벡터 자기회귀) 모델** | `notebooks/06_SVAR_forecasting.ipynb` | SVAR(Structural VAR) 기반 시계열 예측 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/06_SVAR_forecasting.ipynb) |
 
+## 🗂 **실습 07: Granger Causality 테스트**  
+| 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+|-------------|------------|-----------|----------|
+| **Granger Causality Test + VAR** | `notebooks/07_GrangerCausality_VAR.ipynb` | Granger 인과관계를 활용한 VAR 모델 기반 시계열 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/07_GrangerCausality_VAR.ipynb) |
+
+## 🗂 **실습 08~09: 금융 시계열 변동성 모델링**  
+| 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
+|-------------|------------|-----------|----------|
+| **ARCH 모델** | `notebooks/08_ARCH_volatility.ipynb` | ARCH기반 변동성 분석 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/08_ARCH_volatility.ipynb) |
+| **GARCH 모델** | `notebooks/09_GARCH_volatility.ipynb` | GARCH 기반 변동성 분석  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/09_GARCH_volatility.ipynb) |
 
 ## 🗂 실습 11~13: 회귀 기반 예측  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
