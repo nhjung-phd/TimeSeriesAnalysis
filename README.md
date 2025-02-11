@@ -67,9 +67,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 │── requirements.txt            # 패키지 설치 파일
 ```
 
-## 🗂 실습 00: 데이터 전처리  
+## 🗂 실습 00: 시계열 데이터 수집 및 전처리  
 | 🔍 실습 주제 | 📂 코드 파일 | 🏷️ 설명 | ▶️ 실행 |
 |-------------|------------|-----------|----------|
+| **가격 데이터 수집** | `notebooks/00_pricedata.ipynb` | 다양한 금융 데이터 소스에서 주가 및 경제 지표 수집 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_pricedata.ipynb) |
 | **데이터 전처리** | `notebooks/00_data_preprocessing.ipynb` | 결측치 처리, 이상치 탐지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) |
 
 
