@@ -21,20 +21,26 @@ import seaborn as sns
 
 ---
 
-## 📊 **2. 데이터 로드 및 기본 정보 확인**
+## 📊 **2. 테슬라(TSLA) 주가 데이터 다운로드 및 시각화**  
 ```plaintext
-Pandas를 사용하여 CSV 파일을 불러오고, 데이터의 기본 정보를 확인하는 코드를 작성해줘.
-head(), info(), describe() 함수를 사용해줘.
+yfinance 라이브러리를 사용하여 테슬라(TSLA) 주가 데이터를 가져오고,  
+Matplotlib을 이용하여 시계열 그래프를 그리는 코드를 작성해줘.  
+최근 2년 치 데이터를 사용하고, "Close" 가격을 예측 대상으로 삼아줘.
 ```
 
-📌 **예제 코드**
+📌 **예제 코드**  
 ```python
-df = pd.read_csv("data/sample_data.csv")
+# 📌 1️⃣ 테슬라(TSLA) 주가 데이터 다운로드 (최근 2년치)
+df = yf.download("TSLA", start="2022-01-01", end="2024-01-01")
 
-# 데이터 기본 정보 확인
-print(df.head())  # 상위 5개 행 출력
-print(df.info())  # 컬럼별 데이터 타입 및 결측치 확인
-print(df.describe())  # 기초 통계 정보 출력
+# 📌 2️⃣ 시계열 데이터 시각화
+plt.figure(figsize=(12, 5))
+plt.plot(df.index, df["Close"], label="Tesla Stock Price (Close)", color="black")
+plt.title("Tesla Stock Price Time Series")
+plt.xlabel("Date")
+plt.ylabel("Close Price (USD)")
+plt.legend()
+plt.show()
 ```
 
 ---
