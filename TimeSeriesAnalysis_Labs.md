@@ -150,23 +150,3 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 
-### 📢 **주의사항**
-
-- 📘 금융 데이터 변동성
-금융 데이터는 시장 상황에 따라 변동될 수 있으며, 실행 시점에 따라 데이터 값이 달라질 수 있습니다.
-
-- 📘 연구 및 교육 목적
-본 실습은 연구 및 교육 목적으로 제공되며, 실제 투자 결정을 위한 금융 자문으로 사용할 수 없습니다.
-
-
-### 🎯 기여 방법 (Contributing)
-1. 이 프로젝트에 기여하고 싶다면, 저장소를 `fork`한 후 `pull request`를 보내주세요.
-2. 제안 사항이나 오류 수정은 `Issues` 탭을 이용해주세요.
-
-
-## 📖 참고 자료 (References)
-- 🔗 [학술 저널](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/Journals.md)
-- 🔗 [참고 문헌](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/References.md)
-- 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
-- 🔗 [TensorFlow Time Series](https://www.tensorflow.org/tutorials/structured_data/time_series)
-- 🔗 [Scikit-Learn 공식 문서](https://scikit-learn.org/stable/)
