@@ -57,6 +57,7 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 ## 📖 참고 자료 (References)
 - 🔗 [학술 저널](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/Journals.md)
 - 🔗 [참고 문헌](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/References.md)
+- 🔗 [Datasets](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/dataset.md)
 - 🔗 [Statsmodels 공식 문서](https://www.statsmodels.org/stable/index.html)
 - 🔗 [TensorFlow Time Series](https://www.tensorflow.org/tutorials/structured_data/time_series)
 - 🔗 [Scikit-Learn 공식 문서](https://scikit-learn.org/stable/)
