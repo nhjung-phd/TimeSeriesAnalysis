@@ -150,3 +150,24 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 
+---
+
+## 📌 참고자료: 시계열 분석 치트시트
+시계열 분석에 필요한 이론, 모델 종류, 분석 기법 등을 한눈에 정리한 요약 자료입니다.
+
+| 문서 제목       | 설명                                                                 | 링크                                                                                     |
+|----------------|----------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| 📖 `cheatsheet.md` | 시계열 분석 개요, 통계적 모델, 딥러닝 모델, 정상성 검정, 시각화, 이상치 탐지 등 실전 정리 | [📂 Cheatsheet 보기](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/cheatsheet.md) |
+
+---
+
+## ✨ 주요 포함 내용
+
+- 시계열 핵심 개념 요약 (정상성, 자기상관, 차분 등)
+- AR, MA, ARIMA, SARIMA, VAR 등 통계 기반 예측 모델 정리
+- RNN, LSTM, GRU, Transformer 등 딥러닝 기반 예측 구조 설명
+- 정상성 검정 (ADF, KPSS), 성능 평가 지표
+- 시각화 함수 및 이상치 탐지, 외생변수 포함 방법
+- 파이썬 주요 라이브러리 정리 (`statsmodels`, `arch`, `sktime`, `darts`, `tensorflow`, `torch` 등)
+
+---
