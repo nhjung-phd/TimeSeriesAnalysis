@@ -1,4 +1,3 @@
-```markdown
 # 📌 Time Series Analysis Cheatsheet 
 
 시계열 분석의 통계적 기법부터 딥러닝 기반 예측, 실무 적용 팁까지 모두 담은 종합 치트시트입니다.
