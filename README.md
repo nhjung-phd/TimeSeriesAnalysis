@@ -40,6 +40,11 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 
 
 ---
+
+## 🧪 학생 프로젝트 소개
+- 🔗 [👩‍💻 학생 프로젝트 보기](./docs/student_projects.md)
+
+---
 ### 📢 **주의사항**
 
 - 📘 금융 데이터 변동성
@@ -65,6 +70,7 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 - 🔗 [Scikit-Learn 공식 문서](https://scikit-learn.org/stable/)
 
 ---
+
 
 👨‍🏫 **Instructor: 정낙현 박사 (Dr. Jung, Nak Hyun)**  
 
