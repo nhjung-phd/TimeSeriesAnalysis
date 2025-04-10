@@ -99,7 +99,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 ## 🛠 종목리스트
-🔹 **[📂 종목리스트](example/00.stock_list.md)**  
+🔹 **[📂 종목리스트](examples/00.stock_list.md)**  
 
 
 ---
