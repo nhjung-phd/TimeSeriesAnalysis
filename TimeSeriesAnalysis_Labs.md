@@ -85,6 +85,13 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | CNN 기반 예측 | [`25_cnn_forecasting_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/25_cnn_forecasting_prompt.md) | [`25_cnn_forecasting.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/25_cnn_forecasting.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/25_cnn_forecasting.ipynb) |
 | Transformer 기반 예측 | [`26_transformer_encoder_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/26_transformer_encoder_prompt.md) | [`26_transformer_encoder.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/26_transformer_encoder.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/26_transformer_encoder.ipynb) |
 
+## **🗂 실습 27~30: 추가자료**  
+| 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 실행 |
+|-------------|--------------------------|--------------------------|----------|
+| 이상치(IQR) |   | [`27_stl_iqr_outlier.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/27_stl_iqr_outlier.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/27_stl_iqr_outlier.ipynb) |
+| 이상치(Shewhart) |  | [`28_stl_Shewhart_Outlier.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/28_stl_Shewhart_Outlier.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/28_stl_Shewhart_Outlier.ipynb) |
+| 이상치(EWMA) |  | [`29_stl_ewma_outlier.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/29_stl_ewma_outlier.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/29_stl_ewma_outlier.ipynb) |
+| IRF | | [`30_​Impulse_Response_Function.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/30_​Impulse_Response_Function.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/30_​Impulse_Response_Function.ipynb) |
 
 
 
