@@ -102,6 +102,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 🔹 **[📂 종목리스트](examples/00.stock_list.md)**  
 
 
+## 📄 시계열분석 논문 작성 가이드
+🔹 **[📂 논문작성가이드](docs/timeseriesjournalpaper.md)**  
+
+
 ---
 
 ## 📟 코드 실행 방법
