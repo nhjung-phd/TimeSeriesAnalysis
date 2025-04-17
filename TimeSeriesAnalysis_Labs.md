@@ -93,7 +93,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 이상치(EWMA) |  | [`29_stl_ewma_outlier.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/29_stl_ewma_outlier.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/29_stl_ewma_outlier.ipynb) |
 | IRF | | [`30_​Impulse_Response_Function.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/30_​Impulse_Response_Function.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/30_​Impulse_Response_Function.ipynb) |
 | 앙상블(Ensemble) | | [`31_Ensemble.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/31_Ensemble.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/31_Ensemble.ipynb) |
-
+| 다중공선성 | | [`32_Multicollinearity.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/32_Multicollinearity.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/32_Multicollinearity.ipynb) |
 
 
 ---
