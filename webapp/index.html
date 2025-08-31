@@ -10,9 +10,19 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
 
 <!-- (추가) 로컬 ARIMA 비동기 로더 -->
-<script>
-  // 하위 경로(/TimeSeriesAnalysis/)에서도 잘 동작하도록 상대경로 사용
-  window.ARIMAPromise = import('./vendor/arima/async.js');
+<!-- ESM로 로드 (esm.sh 경유) -->
+<script type="module">
+  import ARIMAFactory from "https://esm.sh/arima/async";
+
+  // wasm의 실제 위치를 알려줘야 합니다(이 예시는 jsDelivr의 원본 wasm 사용)
+  window.ARIMAPromise = ARIMAFactory({
+    locateFile: (path) => {
+      if (path.endsWith(".wasm")) {
+        return "https://cdn.jsdelivr.net/npm/arima/arima.wasm";
+      }
+      return path;
+    }
+  });
 </script>
   <style>
     body{background:#f8fafc}
