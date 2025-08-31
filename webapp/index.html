@@ -9,8 +9,11 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
 
-  <!-- ARIMA (WASM) - Chrome에서는 async 로더 사용 권장 -->
-  <script src="https://cdn.jsdelivr.net/npm/arima/async.js"></script>
+<!-- 추가: ESM로 로딩하고 전역 Promise로 노출 -->
+<script type="module">
+  import ARIMAPromise from 'https://cdn.jsdelivr.net/npm/arima@0.2.5/async.js/+esm';
+  window.ARIMAPromise = ARIMAPromise; // stat_models.js가 이걸 기다립니다.
+</script>
   <style>
     body{background:#f8fafc}
     .tab-btn.active{color:#2563eb;border-bottom:2px solid #2563eb;font-weight:600}
