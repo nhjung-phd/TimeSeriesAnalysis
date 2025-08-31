@@ -57,34 +57,42 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     return false;
   };
 
+// app.js 상단 DOMContentLoaded 내부의 "기본 CSV 자동 로드" 구간 교체
 // ✅ 기본 CSV 자동 로드
-const CSV_PATH = './data/tsla_sample.csv';  // 또는 '/TimeSeriesAnalysis/data/tsla_sample.csv'
-
 try {
-  const res = await fetch(CSV_PATH, { cache: 'no-store' });
-  if (!res.ok) throw new Error('기본 CSV 파일을 찾을 수 없습니다.');
+  // index.html 기준으로 절대 URL 계산 (GitHub Pages 서브경로에서도 안전)
+//  const CSV_URL = new URL('data/tsla_sample.csv', document.baseURI).href;
+  const CSV_URL = 'https://nhjung-phd.github.io/TimeSeriesAnalysis/data/tsla_sample.csv';
+
+
+  const res = await fetch(CSV_URL, { cache: 'no-store' });
+  if (!res.ok) throw new Error('CSV fetch 실패');
   const text = await res.text();
+
   const { dates, closes } = TSData.parseCSVDateClose(text);
+  TS_STATE.dates = dates;
+  TS_STATE.close = closes;
 
-  // 전역 상태 세팅
-  window.TS_STATE = { dates, close: closes, closeTransformed: null };
+  // 초기 그리기
+  const ch = ensurePrepChart();
+  ch.data.labels = dates;
+  ch.data.datasets[0].data = closes;
+  ch.update();
 
-  // 첫 그래프 렌더
-  const chart = ensurePrepChart();
-  chart.data.labels = dates;
-  chart.data.datasets[0].data = closes;
-  chart.update();
-
+  // 시작/종료일 기본값 세팅
   preStart.value = dates[0];
   preEnd.value   = dates[dates.length - 1];
 
+  // (선택) CSV 정보 표기 요소가 있으면 업데이트
   const infoEl = document.getElementById('csv-info');
-  if (infoEl) infoEl.textContent = `샘플 로드: ${CSV_PATH} (${dates.length} points)`;
+  if (infoEl) infoEl.textContent = `샘플 로드: ${CSV_URL} (${dates.length} points)`;
 } catch (e) {
-  console.warn(e);
+  console.error(e);
   const infoEl = document.getElementById('csv-info');
-  if (infoEl) infoEl.textContent = `샘플 로딩 실패: ${CSV_PATH} 를 확인하거나 직접 업로드하세요.`;
+  if (infoEl) infoEl.textContent = '샘플 로딩 실패: 기본 CSV를 찾을 수 없습니다.';
+  alert('기본 데이터 로드 실패: 샘플 CSV 경로 또는 서버 구동 상태를 확인하세요.');
 }
+
 
 
   // 파일 업로드 (ID: pre-file 로 수정)
