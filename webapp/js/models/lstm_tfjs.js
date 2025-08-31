@@ -1,57 +1,42 @@
 window.Models = window.Models || {};
-window.Models.LSTM = (() => {
-  let chart, statusEl;
-
+window.Models.LSTM = (()=>{
   const init = (canvasId, statusId) => {
-    statusEl = document.getElementById(statusId);
     const ctx = document.getElementById(canvasId).getContext('2d');
-    const lbls = TSData.labels(120);
-    chart = Charts.line(ctx, lbls, [{
-      label:'실제(정규화)', data:Array(120).fill(null), borderColor:'rgb(16,185,129)'
-    },{
-      label:'예측', data:Array(120).fill(null), borderColor:'rgb(244,63,94)'
-    }]);
-    return chart;
+    const chart = new Chart(ctx, { type:'line', data:{labels:[], datasets:[]}, options:{responsive:true, maintainAspectRatio:false} });
+    return { chart, statusEl: document.getElementById(statusId) };
   };
 
-  const trainAndPredict = async () => {
-    status('데이터 준비 중…');
-    const raw = TSData.gen(140, 100);
-    const norm = TSData.minmax(raw);
-    const { X, y } = TSData.makeWindows(norm, 20);
-    const split = Math.floor(X.length*0.8);
-    const xTr = tf.tensor3d(X.slice(0,split).map(w=>w.map(v=>[v]))); // [N,20,1]
-    const yTr = tf.tensor2d(y.slice(0,split), [split,1]);
-    const xTe = tf.tensor3d(X.slice(split).map(w=>w.map(v=>[v])));
-    const yTe = tf.tensor2d(y.slice(split), [X.length-split,1]);
+  const makeToyData = () => {
+    const xs = [], ys = [];
+    for (let t=0;t<400;t++){ const v = Math.sin(t/12) + Math.random()*0.1; xs.push(v); }
+    for (let t=1;t<xs.length;t++) ys.push(xs[t]);
+    return xs.slice(0,-1).map((v,i)=>[v]), ys;
+  };
 
-    status('모델 구성…');
+  const toTensor = (arr, shape) => tf.tensor(arr, shape);
+
+  const trainAndPredict = async (ctx) => {
+    ctx.statusEl.textContent = '학습중...';
+    const [xRaw, yRaw] = makeToyData();
+    const X = toTensor(xRaw, [xRaw.length, 1, 1]);
+    const Y = toTensor(yRaw, [yRaw.length, 1]);
     const model = tf.sequential();
-    model.add(tf.layers.lstm({ units:16, inputShape:[20,1], returnSequences:false }));
-    model.add(tf.layers.dense({ units:1 }));
-    model.compile({ optimizer:tf.train.adam(0.01), loss:'mse' });
-
-    status('학습 중…(10 epochs)');
-    await model.fit(xTr, yTr, { epochs:10, batchSize:16, verbose:0 });
-
-    status('예측 중…');
-    const pred = model.predict(xTe).dataSync();
-
-    status('차트 갱신…');
-    const show = norm.slice(0,120);
-    const startIdx = 20 + split;
-    const predSeries = Array(120).fill(null);
-    for (let i=0; i<pred.length && (startIdx+i)<120; i++) predSeries[startIdx+i] = pred[i];
-
-    chart.data.datasets[0].data = show;
-    chart.data.datasets[1].data = predSeries;
-    chart.update();
-
-    xTr.dispose(); yTr.dispose(); xTe.dispose(); yTe.dispose(); model.dispose();
-    status('완료!');
+    model.add(tf.layers.lstm({units:16, inputShape:[1,1]}));
+    model.add(tf.layers.dense({units:1}));
+    model.compile({optimizer:'adam', loss:'mse'});
+    await model.fit(X, Y, {epochs:5, batchSize:16, verbose:0});
+    // predict next 50
+    let last = xRaw[xRaw.length-1];
+    const preds=[]; const labels=[];
+    for (let i=0;i<50;i++){
+      const p = (await model.predict(toTensor([[last]], [1,1,1]))).dataSync()[0];
+      preds.push(p); labels.push(`+${i+1}`); last = p;
+    }
+    ctx.chart.data.labels = labels;
+    ctx.chart.data.datasets = [{label:'LSTM 예측(데모)', data:preds, borderColor:'rgb(220,38,38)'}];
+    ctx.chart.update();
+    ctx.statusEl.textContent = '완료';
   };
-
-  const status = (msg) => { if (statusEl) statusEl.textContent = msg; };
 
   return { init, trainAndPredict };
 })();

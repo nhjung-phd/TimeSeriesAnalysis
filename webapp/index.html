@@ -13,62 +13,149 @@
     .tab-btn.active{color:#2563eb;border-bottom:2px solid #2563eb;font-weight:600}
     .content-section{display:none}.content-section.active{display:block}
     .chart-wrap{position:relative;height:360px}
+    .subgrid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:1024px){.subgrid{grid-template-columns:1fr 1fr}}
+    .pill{display:inline-block;padding:.15rem .5rem;border-radius:9999px;background:#eef2ff;color:#3730a3;font-size:.75rem}
   </style>
 </head>
 <body class="text-slate-800">
   <div class="container mx-auto px-4 py-8">
-    <header class="text-center mb-8">
+    <header class="mb-4">
       <h1 class="text-3xl md:text-4xl font-bold">시계열 분석 실습 페이지</h1>
-      <p class="mt-2 text-slate-600">전통 → ML → DL → 최신(Transformer) 순으로 실습합니다.</p>
-      <p class="mt-1 text-xs text-slate-500">일부 모델은 데모 시뮬레이션이며, LSTM은 TF.js로 실제 학습/예측합니다.</p>
+      <p class="mt-1 text-slate-600">1) 데이터전처리 → 2) 시계열분석 → 3) 통계모델 → 4) 머신러닝 → 5) 딥러닝 → 6) 최신</p>
     </header>
 
-    <nav class="flex justify-center border-b border-slate-200 mb-8" role="tablist">
-      <button class="tab-btn active py-3 px-5 text-slate-600" data-tab="tab-ts">전통적 시계열</button>
-      <button class="tab-btn py-3 px-5 text-slate-600" data-tab="tab-ml">머신러닝</button>
-      <button class="tab-btn py-3 px-5 text-slate-600" data-tab="tab-dl">딥러닝</button>
-      <button class="tab-btn py-3 px-5 text-slate-600" data-tab="tab-latest">최신(Transformer)</button>
+    <nav class="flex gap-2 overflow-x-auto border-b border-slate-200 mb-6" role="tablist">
+      <button class="tab-btn active py-3 px-4 text-slate-700 whitespace-nowrap" data-tab="tab-prep">데이터전처리</button>
+      <button class="tab-btn py-3 px-4 text-slate-700 whitespace-nowrap" data-tab="tab-ts">시계열분석</button>
+      <button class="tab-btn py-3 px-4 text-slate-700 whitespace-nowrap" data-tab="tab-stat">통계모델</button>
+      <button class="tab-btn py-3 px-4 text-slate-700 whitespace-nowrap" data-tab="tab-ml">머신러닝</button>
+      <button class="tab-btn py-3 px-4 text-slate-700 whitespace-nowrap" data-tab="tab-dl">딥러닝</button>
+      <button class="tab-btn py-3 px-4 text-slate-700 whitespace-nowrap" data-tab="tab-latest">최신</button>
     </nav>
 
-    <section id="tab-ts" class="content-section active">
-      <div class="grid md:grid-cols-2 gap-6">
+    <!-- 1) 데이터전처리 -->
+    <section id="tab-prep" class="content-section active">
+      <div class="bg-white p-6 rounded-lg shadow mb-6">
+        <h3 class="text-xl font-semibold mb-2">업로드 & 전체기간 그래프</h3>
+        <p class="text-sm text-slate-600 mb-3">CSV 형식: <span class="pill">Date</span>, <span class="pill">Open</span>, <span class="pill">High</span>, <span class="pill">Low</span>, <span class="pill">Close</span>, <span class="pill">Volume</span></p>
+        <div class="grid md:grid-cols-3 gap-3 mb-3">
+          <div>
+            <label class="block text-xs text-slate-500 mb-1">CSV 파일</label>
+            <input id="pre-file" type="file" accept=".csv" class="w-full border rounded px-2 py-1 bg-white" />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-500 mb-1">시작일</label>
+            <input id="pre-start" type="date" class="w-full border rounded px-2 py-1" />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-500 mb-1">종료일</label>
+            <input id="pre-end" type="date" class="w-full border rounded px-2 py-1" />
+          </div>
+        </div>
+        <div class="flex gap-2 mb-3">
+          <button id="pre-preview" class="bg-slate-800 text-white px-4 py-2 rounded">전체기간 그래프</button>
+          <button id="pre-reset" class="border px-4 py-2 rounded">초기화</button>
+        </div>
+        <div class="chart-wrap"><canvas id="chart-prep"></canvas></div>
+      </div>
+    </section>
+
+    <!-- 2) 시계열분석 -->
+    <section id="tab-ts" class="content-section">
+      <div class="subgrid">
         <div class="bg-white p-6 rounded-lg shadow">
-          <h3 class="text-xl font-semibold mb-2 text-blue-700">ARIMA (데모)</h3>
-          <p class="text-sm text-slate-600 mb-3">자기회귀 + 이동평균 결합 개념을 간단 예측선으로 시각화합니다.</p>
-          <div class="chart-wrap mb-3"><canvas id="chart-arima"></canvas></div>
-          <button id="btn-arima" class="w-full bg-blue-600 text-white py-2 rounded">ARIMA 예측 실행</button>
+          <h3 class="text-lg font-semibold mb-2">이동평균법 & 지수평활법</h3>
+          <div class="flex gap-2 mb-2">
+            <input id="ma-window" type="number" min="2" value="20" class="border rounded px-2 py-1 w-24" />
+            <input id="es-alpha" type="number" step="0.05" min="0.05" max="0.95" value="0.3" class="border rounded px-2 py-1 w-24" />
+            <button id="btn-ma-es" class="bg-blue-600 text-white px-3 py-1 rounded">적용</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-ma-es"></canvas></div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow">
-          <h3 class="text-xl font-semibold mb-2 text-emerald-700">GARCH (데모)</h3>
-          <p class="text-sm text-slate-600 mb-3">가격(선)과 변동성(막대)을 함께 보여 변동성 군집을 직관적으로 확인합니다.</p>
-          <div class="chart-wrap mb-3"><canvas id="chart-garch"></canvas></div>
-          <button id="btn-garch" class="w-full bg-emerald-600 text-white py-2 rounded">변동성 분석 실행</button>
+          <h3 class="text-lg font-semibold mb-2">요소분해 (추세/계절/불규칙)</h3>
+          <div class="flex gap-2 mb-2">
+            <input id="decomp-season" type="number" min="2" value="20" class="border rounded px-2 py-1 w-28" />
+            <button id="btn-decomp" class="bg-indigo-600 text-white px-3 py-1 rounded">분해</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-decomp"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">자기상관 (ACF/PACF)</h3>
+          <div class="flex gap-2 mb-2">
+            <input id="acf-lag" type="number" min="5" value="30" class="border rounded px-2 py-1 w-24" />
+            <button id="btn-acf" class="bg-emerald-600 text-white px-3 py-1 rounded">계산</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-acf"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">정상성 검사</h3>
+          <p class="text-xs text-slate-500 mb-2">평균·분산·자기상관의 시간변화로 직관 점검 (간이판정)</p>
+          <div class="flex gap-2 mb-2">
+            <input id="stat-window" type="number" min="10" value="60" class="border rounded px-2 py-1 w-24" />
+            <button id="btn-stationarity" class="bg-rose-600 text-white px-3 py-1 rounded">검사</button>
+            <span id="stat-result" class="pill">대기</span>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-stationarity"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">차분/평활화 빠른 적용</h3>
+          <div class="flex gap-2 mb-2">
+            <button id="btn-diff1" class="border px-3 py-1 rounded">1차 차분</button>
+            <button id="btn-smooth" class="border px-3 py-1 rounded">평활화(윈도 5)</button>
+            <button id="btn-reset-ts" class="border px-3 py-1 rounded">원복</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-transform"></canvas></div>
         </div>
       </div>
     </section>
 
+    <!-- 3) 통계모델 -->
+    <section id="tab-stat" class="content-section">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2">AR / MA / ARMA / ARIMA / SARIMA (데모)</h3>
+        <p class="text-xs text-slate-500 mb-3">7:3 분할로 학습·예측 후 실제와 비교합니다. (간이 구현)</p>
+        <div class="flex flex-wrap gap-2 mb-3">
+          <label class="text-sm">AR(p) <input id="ar-p" type="number" min="1" value="2" class="border rounded px-2 py-1 w-20"></label>
+          <label class="text-sm">MA(q) <input id="ma-q" type="number" min="1" value="2" class="border rounded px-2 py-1 w-20"></label>
+          <label class="text-sm">ARIMA(p,d,q) d=<input id="arima-d" type="number" min="0" value="1" class="border rounded px-2 py-1 w-16"></label>
+          <label class="text-sm">계절 s=<input id="season-s" type="number" min="0" value="0" class="border rounded px-2 py-1 w-20"></label>
+          <button id="btn-run-ar"    class="bg-blue-600 text-white px-3 py-1 rounded">AR</button>
+          <button id="btn-run-ma"    class="bg-emerald-600 text-white px-3 py-1 rounded">MA</button>
+          <button id="btn-run-arma"  class="bg-indigo-600 text-white px-3 py-1 rounded">ARMA</button>
+          <button id="btn-run-arima" class="bg-rose-600 text-white px-3 py-1 rounded">ARIMA</button>
+          <button id="btn-run-sarima" class="bg-slate-700 text-white px-3 py-1 rounded">SARIMA</button>
+        </div>
+        <div class="chart-wrap"><canvas id="chart-stat"></canvas></div>
+        <p id="stat-metrics" class="text-xs text-slate-500 mt-2">MAE / RMSE</p>
+      </div>
+    </section>
+
+    <!-- 4) 머신러닝 -->
     <section id="tab-ml" class="content-section">
       <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-xl font-semibold mb-2 text-indigo-700">XGBoost (데모)</h3>
-        <p class="text-sm text-slate-600 mb-3">시계열 파생특징의 중요도를 막대그래프로 데모합니다.</p>
-        <div class="chart-wrap mb-3"><canvas id="chart-xgb"></canvas></div>
+        <h3 class="text-xl font-semibold mb-2">머신러닝 (데모)</h3>
+        <p class="text-sm text-slate-600 mb-3">향후: 특징공학 기반 예측 추가</p>
+        <div class="chart-wrap"><canvas id="chart-ml"></canvas></div>
       </div>
     </section>
 
+    <!-- 5) 딥러닝 -->
     <section id="tab-dl" class="content-section">
       <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-xl font-semibold mb-2 text-rose-700">LSTM (TF.js 실제 학습)</h3>
+        <h3 class="text-xl font-semibold mb-2">딥러닝 LSTM (TF.js)</h3>
         <p id="lstm-status" class="text-xs text-slate-500 mb-2">준비됨.</p>
-        <div class="chart-wrap mb-3"><canvas id="chart-lstm"></canvas></div>
+        <div class="chart-wrap"><canvas id="chart-lstm"></canvas></div>
         <button id="btn-lstm" class="w-full bg-rose-600 text-white py-2 rounded">LSTM 학습 & 예측</button>
       </div>
     </section>
 
+    <!-- 6) 최신 -->
     <section id="tab-latest" class="content-section">
       <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-xl font-semibold mb-2">Transformer (데모/안내)</h3>
-        <p class="text-sm text-slate-600 mb-3">브라우저에서는 간단 Self-Attention 가중치 데모를 보여주고, 상세 학습은 노트북과 연동합니다.</p>
-        <div class="chart-wrap mb-3"><canvas id="chart-transformer"></canvas></div>
+        <h3 class="text-xl font-semibold mb-2">Transformer (데모)</h3>
+        <div class="chart-wrap"><canvas id="chart-transformer"></canvas></div>
       </div>
     </section>
   </div>
@@ -77,9 +164,7 @@
   <script src="./js/charts.js"></script>
   <script src="./js/data.js"></script>
   <!-- Models -->
-  <script src="./js/models/arima_demo.js"></script>
-  <script src="./js/models/garch_demo.js"></script>
-  <script src="./js/models/xgboost_demo.js"></script>
+  <script src="./js/models/stat_models.js"></script>
   <script src="./js/models/lstm_tfjs.js"></script>
   <script src="./js/models/transformer_demo.js"></script>
   <!-- App -->
