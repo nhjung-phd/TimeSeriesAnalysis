@@ -11,6 +11,11 @@ Python을 활용하여 실제 데이터를 다루고, 모델을 구현하며, �
 
 ## ⚙️ 실습 환경 설정  
 
+### 💻 **브라우저 실습도 제공됩니다:** 
+[Live Web App](https://nhjung-phd.github.io/TimeSeriesAnalysis)  
+> (CSV 샘플: `data/tsla_sample.csv` 자동 로드)
+---
+
 ### 🔧 **필수 라이브러리 설치**  
 실습을 위해 아래 패키지를 설치해야 합니다.  
 ```bash
