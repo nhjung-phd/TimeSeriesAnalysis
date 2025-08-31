@@ -222,80 +222,45 @@
   };
 
   // SARIMA: 비계절(d), 계절(s) 차분 후 ARMA 근사, 역복원
-  StatModels.runSARIMA = async function argFlex(/* (p,d,q,s) | (tsState, p,d,q,s) */){
-    // --- 1) 인자 정규화: (tsState, p,d,q,s)도 허용 ---
-    let p, d, q, s;
-    if (typeof arguments[0] === 'object') {
-      // 옛 시그니처: (tsState, p, d, q, s)
-      p = Number(arguments[1] ?? 2);
-      d = Number(arguments[2] ?? 1);
-      q = Number(arguments[3] ?? 2);
-      s = Number(arguments[4] ?? 0);
-    } else {
-      // 새 시그니처: (p, d, q, s)
-      p = Number(arguments[0] ?? 2);
-      d = Number(arguments[1] ?? 1);
-      q = Number(arguments[2] ?? 2);
-      s = Number(arguments[3] ?? 0);
-    }
-    p = Math.max(0, p|0);
-    d = Math.max(0, d|0);
-    q = Math.max(0, q|0);
-    s = Math.max(0, s|0);
-
-    // --- 2) 데이터 가져오기 ---
+  StatModels.runSARIMA = async function(p=2, d=1, q=2, s=0){
     const { dates, close: y } = getSeries();
-    const N = y.length;
-    const split = Math.floor(N * 0.7);
+    const split = Math.floor(y.length*0.7);
     const test  = y.slice(split);
-    if (test.length <= 0) {
-      console.warn('SARIMA: 테스트 구간이 없습니다.');
-      return null;
-    }
 
-    // --- 3) 차분 (d, s) ---
-    // 비계절 차분
-    const yD  = d > 0 ? diffN(y, d) : y.slice();         // 길이: N - d
-    // 계절 차분
-    const yDS = s > 0 ? sdiff(yD, s) : yD;               // 길이: N - d - s
+    const dN = Math.max(0, d|0);
+    const sN = Math.max(0, s|0);
 
-    // 차분 공간에서의 split 인덱스 (테스트 길이를 맞춤)
-    // (원본 split에 해당하는 차분 인덱스는 대략 split - d - s)
-    const splitDS = Math.max(0, yDS.length - test.length);
+    // 1) 비계절 차분
+    const yD = dN>0 ? diffN(y, dN) : y.slice();
+    // 2) 계절 차분
+    const yDS = sN>0 ? sdiff(yD, sN) : yD;
 
+    // 차분된 공간에서의 split 인덱스 = (원본 split) - d - s
+    const splitDS = yDS.length - test.length;
     const trainDS = yDS.slice(0, splitDS);
-    const testDS  = yDS.slice(splitDS);                  // 길이 ~= test.length
+    const testDS  = yDS.slice(splitDS);
 
-    // --- 4) 차분 공간에서 ARMA(p,q) 근사 예측 ---
-    const predsDiff = predictARMA(trainDS, testDS, p, q); // 차분공간 예측
+    // ARMA 예측(차분 공간) — 여기선 AR(p) + 잔차평균 q
+    const predsDiff = predictARMA(trainDS, testDS, Math.max(0,p), Math.max(0,q));
 
-    // --- 5) 계절 복원 (yDS -> yD) ---
+    // 3) 계절 복원
     let restored = predsDiff.slice();
-    if (s > 0) {
-      // yDS[i] = yD[i+s] - yD[i] 이므로,
-      // 예측 시작 시점의 yD 과거 s개가 필요 => yD.slice(splitDS, splitDS + s)
-      let lastSeason = yD.slice(splitDS, splitDS + s);
-      if (lastSeason.length < s) {
-        // 부족하면 앞쪽에서 채워 넣기
-        const need = s - lastSeason.length;
-        const pad  = yD.slice(Math.max(0, splitDS - need), splitDS);
-        lastSeason = pad.concat(lastSeason);
+    if (sN>0){
+      // 비계절 차분된 yD에서 splitDS 이후의 최근 s개를 계절 기준으로 사용
+      let lastSeason = yD.slice(splitDS, splitDS + sN);
+      if (lastSeason.length < sN){
+        const need = sN - lastSeason.length;
+        lastSeason = yD.slice(Math.max(0, splitDS - need), splitDS).concat(lastSeason);
       }
-      restored = undiffS(lastSeason, predsDiff, s); // yD 공간으로 복원
+      restored = undiffS(lastSeason, predsDiff, sN);
     }
 
-    // --- 6) 비계절 복원 (yD -> y) ---
-    const lastVals = y.slice(split - d, split);          // 비계절 복원용 과거 d개
-    const preds = d > 0 ? undiffN(lastVals, restored, d) : restored;
+    // 4) 비계절 복원
+    const lastVals = y.slice(split - dN, split);
+    const preds = dN>0 ? undiffN(lastVals, restored, dN) : restored;
 
-    // --- 7) 길이 정합 (라벨/실제/예측 동일 길이) ---
     const yHat = preds.slice(0, test.length);
-    const labels = dates.slice(split, split + yHat.length);
-    const yTrue  = y.slice(split,  split + yHat.length);
-
-    // --- 8) 차트 렌더 ---
     renderChartAndMetrics(dates, y, split, yHat, `SARIMA(${p},${d},${q}) s=${s} (approx)`);
-
-    return { labels, yTrue, yHat };
+    return { labels: dates.slice(split), yTrue: test, yHat };
   };
 })();
