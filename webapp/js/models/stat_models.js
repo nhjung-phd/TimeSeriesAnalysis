@@ -79,20 +79,31 @@
     });
   }
 
-  // ARIMA WASM 로더 보장
+  // js/models/stat_models.js  안의 ensureARIMA()를 아래로 교체
   let ARIMAClass = null;
   async function ensureARIMA() {
     if (ARIMAClass) return ARIMAClass;
+
+    // 1) index.html에서 전역 Promise를 준 경우
     if (window.ARIMAPromise && typeof window.ARIMAPromise.then === 'function') {
-      ARIMAClass = await window.ARIMAPromise; // async 로더
+      ARIMAClass = await window.ARIMAPromise;
       return ARIMAClass;
     }
-    // 혹시나 글로벌에 동기 ARIMA가 있으면 사용
+    // 2) 전역 동기 ARIMA가 있는 경우
     if (window.ARIMA) {
       ARIMAClass = window.ARIMA;
       return ARIMAClass;
     }
-    throw new Error('ARIMA 라이브러리를 불러오지 못했습니다. index.html의 arima/async.js 스크립트를 확인하세요.');
+    // 3) 둘 다 없으면, 여기서 직접 ESM으로 불러오기 (자동 복구)
+    try {
+      const mod = await import('https://cdn.jsdelivr.net/npm/arima@0.2.5/async.js/+esm');
+      const maybePromise = (mod && 'default' in mod) ? mod.default : mod;
+      ARIMAClass = await maybePromise;   // async.js는 Promise로 ARIMA 클래스를 넘깁니다.
+      return ARIMAClass;
+    } catch (e) {
+      console.error(e);
+      throw new Error('ARIMA 로드 실패: CDN 접근 또는 네트워크를 확인하세요.');
+    }
   }
 
   // 공통 실행기: 학습/예측/그리기/메트릭
