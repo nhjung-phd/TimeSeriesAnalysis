@@ -9,7 +9,7 @@
 
 🔗 [👉 웹사이트 바로가기][https://time-series-analysis.po24lio.com/](https://time-series-analysis.po24lio.com/)  
 
-- **작성자**: 이루오  (AI 빅데이터 석사과정)
+- **작성자**: 이루오  (25년 8월 AI 빅데이터 석사과정 졸업)
 
 ### 📌 앱 소개  
 이 앱은 **서울시 대기질 데이터를 활용하여 시계열 데이터를 분석하고 시각화**하는 도구입니다.
