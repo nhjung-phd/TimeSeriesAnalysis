@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Time Series Analysis Lab</title>
+  <meta name="color-scheme" content="light" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <style>
+    body{background:#f8fafc}
+    .tab-btn.active{color:#2563eb;border-bottom:2px solid #2563eb;font-weight:600}
+    .content-section{display:none}.content-section.active{display:block}
+    .chart-wrap{position:relative;height:360px}
+  </style>
+</head>
+<body class="text-slate-800">
+  <div class="container mx-auto px-4 py-8">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold">시계열 분석 실습 페이지</h1>
+      <p class="mt-2 text-slate-600">전통 → ML → DL → 최신(Transformer) 순으로 실습합니다.</p>
+      <p class="mt-1 text-xs text-slate-500">일부 모델은 데모 시뮬레이션이며, LSTM은 TF.js로 실제 학습/예측합니다.</p>
+    </header>
+
+    <nav class="flex justify-center border-b border-slate-200 mb-8" role="tablist">
+      <button class="tab-btn active py-3 px-5 text-slate-600" data-tab="tab-ts">전통적 시계열</button>
+      <button class="tab-btn py-3 px-5 text-slate-600" data-tab="tab-ml">머신러닝</button>
+      <button class="tab-btn py-3 px-5 text-slate-600" data-tab="tab-dl">딥러닝</button>
+      <button class="tab-btn py-3 px-5 text-slate-600" data-tab="tab-latest">최신(Transformer)</button>
+    </nav>
+
+    <section id="tab-ts" class="content-section active">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2 text-blue-700">ARIMA (데모)</h3>
+          <p class="text-sm text-slate-600 mb-3">자기회귀 + 이동평균 결합 개념을 간단 예측선으로 시각화합니다.</p>
+          <div class="chart-wrap mb-3"><canvas id="chart-arima"></canvas></div>
+          <button id="btn-arima" class="w-full bg-blue-600 text-white py-2 rounded">ARIMA 예측 실행</button>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2 text-emerald-700">GARCH (데모)</h3>
+          <p class="text-sm text-slate-600 mb-3">가격(선)과 변동성(막대)을 함께 보여 변동성 군집을 직관적으로 확인합니다.</p>
+          <div class="chart-wrap mb-3"><canvas id="chart-garch"></canvas></div>
+          <button id="btn-garch" class="w-full bg-emerald-600 text-white py-2 rounded">변동성 분석 실행</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ml" class="content-section">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2 text-indigo-700">XGBoost (데모)</h3>
+        <p class="text-sm text-slate-600 mb-3">시계열 파생특징의 중요도를 막대그래프로 데모합니다.</p>
+        <div class="chart-wrap mb-3"><canvas id="chart-xgb"></canvas></div>
+      </div>
+    </section>
+
+    <section id="tab-dl" class="content-section">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2 text-rose-700">LSTM (TF.js 실제 학습)</h3>
+        <p id="lstm-status" class="text-xs text-slate-500 mb-2">준비됨.</p>
+        <div class="chart-wrap mb-3"><canvas id="chart-lstm"></canvas></div>
+        <button id="btn-lstm" class="w-full bg-rose-600 text-white py-2 rounded">LSTM 학습 & 예측</button>
+      </div>
+    </section>
+
+    <section id="tab-latest" class="content-section">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2">Transformer (데모/안내)</h3>
+        <p class="text-sm text-slate-600 mb-3">브라우저에서는 간단 Self-Attention 가중치 데모를 보여주고, 상세 학습은 노트북과 연동합니다.</p>
+        <div class="chart-wrap mb-3"><canvas id="chart-transformer"></canvas></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Core JS -->
+  <script src="./js/charts.js"></script>
+  <script src="./js/data.js"></script>
+  <!-- Models -->
+  <script src="./js/models/arima_demo.js"></script>
+  <script src="./js/models/garch_demo.js"></script>
+  <script src="./js/models/xgboost_demo.js"></script>
+  <script src="./js/models/lstm_tfjs.js"></script>
+  <script src="./js/models/transformer_demo.js"></script>
+  <!-- App -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
