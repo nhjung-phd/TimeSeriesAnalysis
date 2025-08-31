@@ -133,6 +133,161 @@ try {
     chart.update();
   });
 
+  /* =========================
+ * 2) 시계열분석 — 보강 코드
+ * (기존 코드 유지, 없는 핸들러만 추가)
+ * ========================= */
+
+// 공통 가드
+const _needTS = () => {
+  if (!window.TS_STATE || !Array.isArray(TS_STATE.close) || TS_STATE.close.length === 0) {
+    alert('먼저 데이터전처리 탭에서 CSV를 로드하세요.');
+    return true;
+  }
+  return false;
+};
+
+/* ---- (A) 이동평균/지수평활: btn-ma-es → chart-ma-es ---- */
+(() => {
+  const btn = document.getElementById('btn-ma-es');
+  const canvas = document.getElementById('chart-ma-es');
+  if (!btn || !canvas) return; // 요소 없으면 스킵
+
+  let maEsChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: { labels: [], datasets: [] },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } }
+  });
+
+  btn.addEventListener('click', () => {
+    if (_needTS()) return;
+    const winEl   = document.getElementById('ma-window');
+    const alphaEl = document.getElementById('es-alpha');
+    const w = Math.max(2, parseInt((winEl?.value ?? '20'), 10));
+    const a = Math.min(0.95, Math.max(0.05, parseFloat((alphaEl?.value ?? '0.3'))));
+
+    const labels = TS_STATE.dates;
+    const y      = TS_STATE.close;
+    const ma     = TSData.movingAverage(y, w);
+    const es     = TSData.expSmooth(y, a);
+
+    maEsChart.data.labels = labels;
+    maEsChart.data.datasets = [
+      { label:'Close',   data:y,  borderColor:'rgb(30,64,175)', tension:.12, pointRadius:0 },
+      { label:`MA(${w})`, data:ma, borderColor:'rgb(16,185,129)', tension:.12, pointRadius:0 },
+      { label:`ES(α=${a})`, data:es, borderColor:'rgb(244,63,94)', tension:.12, pointRadius:0 },
+    ];
+    maEsChart.update();
+  });
+})();
+
+/* ---- (B) 요소분해: btn-decomp → chart-decomp ---- */
+(() => {
+  const btn = document.getElementById('btn-decomp');
+  const canvas = document.getElementById('chart-decomp');
+  if (!btn || !canvas) return;
+
+  let decompChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: { labels: [], datasets: [] },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } }
+  });
+
+  btn.addEventListener('click', () => {
+    if (_needTS()) return;
+    const seasonEl = document.getElementById('decomp-season');
+    const s = Math.max(2, parseInt((seasonEl?.value ?? '20'), 10));
+
+    const { trend, seasonal, irregular } = TSData.decomposeAdditive(TS_STATE.close, s);
+
+    decompChart.data.labels = TS_STATE.dates;
+    decompChart.data.datasets = [
+      { label:'Trend',     data:trend,     borderColor:'rgb(99,102,241)',  tension:.12, pointRadius:0 },
+      { label:'Seasonal',  data:seasonal,  borderColor:'rgb(234,179,8)',   tension:.12, pointRadius:0 },
+      { label:'Irregular', data:irregular, borderColor:'rgb(107,114,128)', tension:.12, pointRadius:0 },
+    ];
+    decompChart.update();
+  });
+})();
+
+/* ---- (C) 정상성 검사: btn-stationarity → chart-stationarity, stat-result ---- */
+(() => {
+  const btn = document.getElementById('btn-stationarity');
+  const badge = document.getElementById('stat-result');
+  const canvas = document.getElementById('chart-stationarity');
+  if (!btn || !canvas) return;
+
+  let stationChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: { labels: [], datasets: [] },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } }
+  });
+
+  btn.addEventListener('click', () => {
+    if (_needTS()) return;
+    const wEl = document.getElementById('stat-window');
+    const w = Math.max(10, parseInt((wEl?.value ?? '60'), 10));
+
+    const { meanSeries, varSeries, ac1Series, verdict } = TSData.stationarityScan(TS_STATE.close, w);
+
+    if (badge){
+      badge.textContent = verdict ? '정상(간이)' : '비정상(간이)';
+      badge.style.background = verdict ? '#dcfce7' : '#fee2e2';
+      badge.style.color      = verdict ? '#065f46' : '#991b1b';
+    }
+
+    stationChart.data.labels = TS_STATE.dates;
+    stationChart.data.datasets = [
+      { label:'Mean(win)', data: TSData.padLeft(meanSeries), borderColor:'rgb(99,102,241)',  tension:.12, pointRadius:0 },
+      { label:'Var(win)',  data: TSData.padLeft(varSeries),  borderColor:'rgb(234,88,12)',  tension:.12, pointRadius:0 },
+      { label:'ACF1(win)', data: TSData.padLeft(ac1Series),  borderColor:'rgb(16,185,129)', tension:.12, pointRadius:0 },
+    ];
+    stationChart.update();
+  });
+})();
+
+/* ---- (D) 차분/평활화: btn-diff1 / btn-smooth / btn-reset-ts → chart-transform ---- */
+(() => {
+  const btnDiff   = document.getElementById('btn-diff1');
+  const btnSmooth = document.getElementById('btn-smooth');
+  const btnReset  = document.getElementById('btn-reset-ts');
+  const canvas    = document.getElementById('chart-transform');
+  if (!canvas) return;
+
+  let transformChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: { labels: [], datasets: [] },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } }
+  });
+
+  btnDiff?.addEventListener('click', () => {
+    if (_needTS()) return;
+    const y1 = TSData.diff(TS_STATE.close, 1);
+    transformChart.data.labels = TS_STATE.dates.slice(1);
+    transformChart.data.datasets = [
+      { label:'1차 차분', data:y1, borderColor:'rgb(234,88,12)', tension:.12, pointRadius:0 }
+    ];
+    transformChart.update();
+  });
+
+  btnSmooth?.addEventListener('click', () => {
+    if (_needTS()) return;
+    const ma5 = TSData.movingAverage(TS_STATE.close, 5);
+    transformChart.data.labels = TS_STATE.dates;
+    transformChart.data.datasets = [
+      { label:'평활(5)', data:ma5, borderColor:'rgb(16,185,129)', tension:.12, pointRadius:0 }
+    ];
+    transformChart.update();
+  });
+
+  btnReset?.addEventListener('click', () => {
+    transformChart.data.labels = [];
+    transformChart.data.datasets = [];
+    transformChart.update();
+  });
+})();
+
+
   // ACF/PACF (ID: btn-acf 로 수정)
   document.getElementById('btn-acf').addEventListener('click', ()=>{
     if (needData()) return;
