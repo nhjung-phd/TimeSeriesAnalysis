@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
 
   // 기본 CSV 자동 로드
 // (상단 any import들 뒤 적당한 위치)
-const CSV_PATH = './webapp/data/tsla_sample.csv';  // ✅ 기본 CSV 경로
+const CSV_PATH = './data/tsla_sample.csv';  // ✅ 기본 CSV 경로
 
 // --- 기본 CSV 자동 로드 ---
 try {
@@ -83,7 +83,7 @@ try {
 } catch (e) {
   console.warn(e);
   const infoEl = document.getElementById('csv-info');
-  if (infoEl) infoEl.textContent = `샘플 로딩 실패: ${CSV_PATH} 를 확인하거나 직접 업로드하세요.`;
+  if (infoEl) infoEl.textContent = `샘플 로딩 실패: ${CSV_PATH} 를 확인하거나 직접 업로드하세요.`;as
 }
 
 
