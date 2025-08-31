@@ -9,10 +9,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
 
-<!-- 추가: ESM로 로딩하고 전역 Promise로 노출 -->
+<!-- 추가: ESM로 async 모듈을 불러와 전역 Promise로 노출 -->
 <script type="module">
   import ARIMAPromise from 'https://cdn.jsdelivr.net/npm/arima@0.2.5/async.js/+esm';
-  window.ARIMAPromise = ARIMAPromise; // stat_models.js가 이걸 기다립니다.
+  window.ARIMAPromise = ARIMAPromise;  // stat_models.js가 이걸 기다립니다.
 </script>
   <style>
     body{background:#f8fafc}
