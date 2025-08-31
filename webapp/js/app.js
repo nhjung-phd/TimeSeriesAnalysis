@@ -166,51 +166,73 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     tfChart.data.labels = []; tfChart.data.datasets = []; tfChart.update();
   });
 
-  // 3) 통계모델 — stat_models.js가 실제 학습/예측/차트/지표를 처리
+  // === 3) 통계모델 ===
+  const statCtx = document.getElementById('chart-stat').getContext('2d');
+  const statChart = new Chart(statCtx, { type:'line', data:{labels:[], datasets:[]},
+    options:{responsive:true, maintainAspectRatio:false}});
+  const metricsEl = document.getElementById('stat-metrics');
+
+  const showStat = (labels, yTrue, yHat, name) => {
+    statChart.data.labels = labels;
+    statChart.data.datasets = [
+      {label:'실제', data:yTrue, borderColor:'rgb(30,64,175)'},
+      {label:name, data:yHat, borderColor:'rgb(220,38,38)'}
+    ];
+    statChart.update();
+    const mae = TSData.mae(yTrue, yHat).toFixed(3);
+    const rmse = TSData.rmse(yTrue, yHat).toFixed(3);
+    metricsEl.textContent = `MAE: ${mae} / RMSE: ${rmse}`;
+  };
+
   const needData = () => {
     if (!TS_STATE.close.length) { alert('CSV 먼저 로드'); return true; }
     return false;
   };
 
   // AR
-  document.getElementById('btn-run-ar').addEventListener('click', async ()=>{
+  document.getElementById('btn-run-ar').addEventListener('click', ()=>{
     if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
-    await StatModels.runAR(p);
+    const { labels, yTrue, yHat } = StatModels.runAR(TS_STATE.dates, TS_STATE.close, p);
+    showStat(labels, yTrue, yHat, `AR(${p})`);
   });
 
   // MA
-  document.getElementById('btn-run-ma').addEventListener('click', async ()=>{
+  document.getElementById('btn-run-ma').addEventListener('click', ()=>{
     if (needData()) return;
     const q = parseInt(document.getElementById('ma-q').value||'2');
-    await StatModels.runMA(q);
+    const { labels, yTrue, yHat } = StatModels.runMA(TS_STATE.dates, TS_STATE.close, q);
+    showStat(labels, yTrue, yHat, `MA(${q}) (naive)`);
   });
 
   // ARMA
-  document.getElementById('btn-run-arma').addEventListener('click', async ()=>{
+  document.getElementById('btn-run-arma').addEventListener('click', ()=>{
     if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
     const q = parseInt(document.getElementById('ma-q').value||'2');
-    await StatModels.runARMA(p, q);
+    const { labels, yTrue, yHat } = StatModels.runARMA(TS_STATE.dates, TS_STATE.close, p, q);
+    showStat(labels, yTrue, yHat, `ARMA(${p},${q}) (approx)`);
   });
 
   // ARIMA
-  document.getElementById('btn-run-arima').addEventListener('click', async ()=>{
+  document.getElementById('btn-run-arima').addEventListener('click', ()=>{
     if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
     const d = parseInt(document.getElementById('arima-d').value||'1');
     const q = parseInt(document.getElementById('ma-q').value||'2');
-    await StatModels.runARIMA(p, d, q);
+    const { labels, yTrue, yHat } = StatModels.runARIMA(TS_STATE.dates, TS_STATE.close, p, d, q);
+    showStat(labels, yTrue, yHat, `ARIMA(${p},${d},${q}) (approx)`);
   });
 
   // SARIMA
-  document.getElementById('btn-run-sarima').addEventListener('click', async ()=>{
+  document.getElementById('btn-run-sarima').addEventListener('click', ()=>{
     if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
     const d = parseInt(document.getElementById('arima-d').value||'1');
     const q = parseInt(document.getElementById('ma-q').value||'2');
     const s = parseInt(document.getElementById('season-s').value||'0');
-    await StatModels.runSARIMA(p, d, q, s);
+    const { labels, yTrue, yHat } = StatModels.runSARIMA(TS_STATE.dates, TS_STATE.close, p, d, q, s);
+    showStat(labels, yTrue, yHat, `SARIMA(${p},${d},${q}) s=${s} (approx)`);
   });
 
   // Auto-ARIMA (버튼이 존재할 때만)
