@@ -6,6 +6,8 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(id).classList.add('active');
+    // Chart.js 반응형을 위해 약간의 지연 후 리사이즈 트리거
+    setTimeout(()=>window.dispatchEvent(new Event('resize')), 50);
   });
 });
 
@@ -25,16 +27,24 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     prepChart = new Chart(ctx, {
       type: 'line',
       data: { labels: [], datasets: [{ label:'Close', data:[], borderColor:'rgb(37,99,235)', tension:.12 }]},
-      options:{ responsive:true, maintainAspectRatio:false }
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
     });
     return prepChart;
   };
 
-  // ✅ 기본 CSV 자동 로드
-  const raw = await fetch("data/tsla_sample.csv").then(r=>r.text());
-  const parsed = TSData.parseCSVDateClose(raw);
-  TS_STATE.dates = parsed.dates;
-  TS_STATE.close = parsed.closes;
+  // ✅ 기본 CSV 자동 로드 (webapp/data/tsla_sample.csv)
+  try {
+    const raw = await fetch("data/tsla_sample.csv", { cache:'no-store' }).then(r=>{
+      if(!r.ok) throw new Error('CSV fetch 실패');
+      return r.text();
+    });
+    const parsed = TSData.parseCSVDateClose(raw);
+    TS_STATE.dates = parsed.dates;
+    TS_STATE.close = parsed.closes;
+  } catch (e){
+    console.error(e);
+    alert("기본 데이터 로드 실패: webapp/data/tsla_sample.csv 경로를 확인하세요.");
+  }
 
   const redraw = ()=>{
     const {dates, values} = TSData.sliceByDate(TS_STATE.dates, TS_STATE.close, preStart.value, preEnd.value);
@@ -60,10 +70,10 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   const maWin = document.getElementById('ma-window');
   const esAlpha = document.getElementById('es-alpha');
   let maChart = new Chart(document.getElementById('chart-ma-es'), { type:'line', data:{labels:[], datasets:[]},
-    options:{responsive:true, maintainAspectRatio:false}});
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}});
 
   maBtn.addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('먼저 데이터전처리 탭에서 CSV를 로드하세요.');
+    if (!TS_STATE.close.length) return alert('기본 CSV가 로드되지 않았습니다.');
     const labels = TS_STATE.dates;
     const y = TS_STATE.close;
     const ma = TSData.movingAverage(y, parseInt(maWin.value||'20'));
@@ -80,9 +90,9 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   // 요소분해
   const deBtn = document.getElementById('btn-decomp');
   let deChart = new Chart(document.getElementById('chart-decomp'), { type:'line', data:{labels:[], datasets:[]},
-    options:{responsive:true, maintainAspectRatio:false}});
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}});
   deBtn.addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('먼저 데이터전처리 탭에서 CSV를 로드하세요.');
+    if (!TS_STATE.close.length) return alert('기본 CSV가 로드되지 않았습니다.');
     const s = parseInt(document.getElementById('decomp-season').value||'20');
     const { trend, seasonal, irregular } = TSData.decomposeAdditive(TS_STATE.close, s);
     deChart.data.labels = TS_STATE.dates;
@@ -97,9 +107,9 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   // ACF/PACF
   const acfBtn = document.getElementById('btn-acf');
   let acfChart = new Chart(document.getElementById('chart-acf'), { type:'bar', data:{labels:[], datasets:[]},
-    options:{responsive:true, maintainAspectRatio:false}});
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}});
   acfBtn.addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('먼저 데이터전처리 탭에서 CSV를 로드하세요.');
+    if (!TS_STATE.close.length) return alert('기본 CSV가 로드되지 않았습니다.');
     const L = parseInt(document.getElementById('acf-lag').value||'30');
     const acf = TSData.acf(TS_STATE.close, L);
     const pacf = TSData.pacf_yw(TS_STATE.close, L);
@@ -116,9 +126,9 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   const stWin = document.getElementById('stat-window');
   const stBadge = document.getElementById('stat-result');
   let stChart = new Chart(document.getElementById('chart-stationarity'), { type:'line', data:{labels:[], datasets:[]},
-    options:{responsive:true, maintainAspectRatio:false}});
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}});
   stBtn.addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('먼저 데이터전처리 탭에서 CSV를 로드하세요.');
+    if (!TS_STATE.close.length) return alert('기본 CSV가 로드되지 않았습니다.');
     const w = parseInt(stWin.value||'60');
     const { meanSeries, varSeries, ac1Series, verdict } = TSData.stationarityScan(TS_STATE.close, w);
     stBadge.textContent = verdict ? '정상(간이)' : '비정상(간이)';
@@ -136,7 +146,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
 
   // 차분/평활화 적용
   let tfChart = new Chart(document.getElementById('chart-transform'), { type:'line', data:{labels:[], datasets:[]},
-    options:{responsive:true, maintainAspectRatio:false}});
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}});
   document.getElementById('btn-diff1').addEventListener('click', ()=>{
     if (!TS_STATE.close.length) return alert('CSV 먼저 로드');
     TS_STATE.closeTransformed = TSData.diff(TS_STATE.close, 1);
@@ -156,67 +166,69 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     tfChart.data.labels = []; tfChart.data.datasets = []; tfChart.update();
   });
 
-  // 3) 통계모델
-  const statCtx = document.getElementById('chart-stat').getContext('2d');
-  const statChart = new Chart(statCtx, { type:'line', data:{labels:[], datasets:[]},
-    options:{responsive:true, maintainAspectRatio:false}});
-  const metricsEl = document.getElementById('stat-metrics');
-
-  const showStat = (labels, yTrue, yHat, name) => {
-    statChart.data.labels = labels;
-    statChart.data.datasets = [
-      {label:'실제', data:yTrue, borderColor:'rgb(30,64,175)'},
-      {label:name, data:yHat, borderColor:'rgb(220,38,38)'}
-    ];
-    statChart.update();
-    const mae = TSData.mae(yTrue, yHat).toFixed(3);
-    const rmse = TSData.rmse(yTrue, yHat).toFixed(3);
-    metricsEl.textContent = `MAE: ${mae} / RMSE: ${rmse}`;
+  // 3) 통계모델 — stat_models.js가 실제 학습/예측/차트/지표를 처리
+  const needData = () => {
+    if (!TS_STATE.close.length) { alert('CSV 먼저 로드'); return true; }
+    return false;
   };
 
-  document.getElementById('btn-run-ar').addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('CSV 먼저 로드');
+  // AR
+  document.getElementById('btn-run-ar').addEventListener('click', async ()=>{
+    if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
-    const { labels, yTrue, yHat } = StatModels.runAR(TS_STATE.dates, TS_STATE.close, p);
-    showStat(labels, yTrue, yHat, `AR(${p})`);
+    await StatModels.runAR(p);
   });
 
-  document.getElementById('btn-run-ma').addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('CSV 먼저 로드');
+  // MA
+  document.getElementById('btn-run-ma').addEventListener('click', async ()=>{
+    if (needData()) return;
     const q = parseInt(document.getElementById('ma-q').value||'2');
-    const { labels, yTrue, yHat } = StatModels.runMA(TS_STATE.dates, TS_STATE.close, q);
-    showStat(labels, yTrue, yHat, `MA(${q}) (naive)`);
+    await StatModels.runMA(q);
   });
 
-  document.getElementById('btn-run-arma').addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('CSV 먼저 로드');
+  // ARMA
+  document.getElementById('btn-run-arma').addEventListener('click', async ()=>{
+    if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
     const q = parseInt(document.getElementById('ma-q').value||'2');
-    const { labels, yTrue, yHat } = StatModels.runARMA(TS_STATE.dates, TS_STATE.close, p, q);
-    showStat(labels, yTrue, yHat, `ARMA(${p},${q}) (approx)`);
+    await StatModels.runARMA(p, q);
   });
 
-  document.getElementById('btn-run-arima').addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('CSV 먼저 로드');
+  // ARIMA
+  document.getElementById('btn-run-arima').addEventListener('click', async ()=>{
+    if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
     const d = parseInt(document.getElementById('arima-d').value||'1');
     const q = parseInt(document.getElementById('ma-q').value||'2');
-    const { labels, yTrue, yHat } = StatModels.runARIMA(TS_STATE.dates, TS_STATE.close, p, d, q);
-    showStat(labels, yTrue, yHat, `ARIMA(${p},${d},${q}) (approx)`);
+    await StatModels.runARIMA(p, d, q);
   });
 
-  document.getElementById('btn-run-sarima').addEventListener('click', ()=>{
-    if (!TS_STATE.close.length) return alert('CSV 먼저 로드');
+  // SARIMA
+  document.getElementById('btn-run-sarima').addEventListener('click', async ()=>{
+    if (needData()) return;
     const p = parseInt(document.getElementById('ar-p').value||'2');
     const d = parseInt(document.getElementById('arima-d').value||'1');
     const q = parseInt(document.getElementById('ma-q').value||'2');
     const s = parseInt(document.getElementById('season-s').value||'0');
-    const { labels, yTrue, yHat } = StatModels.runSARIMA(TS_STATE.dates, TS_STATE.close, p, d, q, s);
-    showStat(labels, yTrue, yHat, `SARIMA(${p},${d},${q}) s=${s} (approx)`);
+    await StatModels.runSARIMA(p, d, q, s);
   });
 
+  // Auto-ARIMA (버튼이 존재할 때만)
+  const autoBtn = document.getElementById('btn-run-auto');
+  if (autoBtn){
+    autoBtn.addEventListener('click', async ()=>{
+      if (needData()) return;
+      const s = parseInt(document.getElementById('season-s').value||'0');
+      await StatModels.runAutoARIMA(s);
+    });
+  }
+
   // 4) ML placeholder
-  new Chart(document.getElementById('chart-ml'), {type:'bar', data:{labels:['T1','T2','T3'], datasets:[{label:'Demo', data:[3,5,2]}]}, options:{responsive:true, maintainAspectRatio:false}});
+  new Chart(document.getElementById('chart-ml'), {
+    type:'bar',
+    data:{labels:['T1','T2','T3'], datasets:[{label:'Demo', data:[3,5,2]}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
+  });
 
   // 5) LSTM (데모)
   const lstm = Models.LSTM.init('chart-lstm','lstm-status');

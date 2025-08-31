@@ -1,163 +1,169 @@
-window.StatModels = (() => {
-  // ---------- helpers ----------
-  const dot = (a,b)=> a.reduce((s,v,i)=> s+v*b[i],0);
-  const transpose = (A)=> A[0].map((_,j)=> A.map(row=>row[j]));
-  const matmul = (A,B)=> {
-    const Bt = transpose(B);
-    return A.map(row => Bt.map(col => dot(row, col)));
-  };
-  const matvec = (A,v)=> A.map(row=> dot(row,v));
+// js/models/stat_models.js
+// 실제 동작하는 AR/MA/ARMA/ARIMA/SARIMA/Auto-ARIMA 구현 (7:3 split)
+// 의존: Chart.js, window.ARIMAPromise (cdn.jsdelivr.net/npm/arima/async.js), window.TSData (data.js)
 
-  // Solve linear system A x = b (Gaussian elimination)
-  const solve = (A, b) => {
-    const n = A.length;
-    const M = A.map((row,i)=> row.concat([b[i]]));
-    for (let i=0;i<n;i++){
-      // pivot
-      let piv = i;
-      for (let r=i+1;r<n;r++) if (Math.abs(M[r][i])>Math.abs(M[piv][i])) piv=r;
-      const tmp = M[i]; M[i]=M[piv]; M[piv]=tmp;
-      let div = M[i][i]; if (Math.abs(div) < 1e-9) div = 1e-9;
-      for (let j=i;j<=n;j++) M[i][j] /= div;
-      for (let r=0;r<n;r++){
-        if (r===i) continue;
-        const factor = M[r][i];
-        for (let j=i;j<=n;j++) M[r][j] -= factor*M[i][j];
+(function () {
+  const StatModels = {};
+  window.StatModels = StatModels;
+
+  // -------- 공용 유틸 --------
+  const ema = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
+  const mae = (y, yhat) => {
+    let s = 0, n = Math.min(y.length, yhat.length);
+    for (let i = 0; i < n; i++) s += Math.abs(y[i] - yhat[i]);
+    return s / n;
+  };
+  const rmse = (y, yhat) => {
+    let s = 0, n = Math.min(y.length, yhat.length);
+    for (let i = 0; i < n; i++) {
+      const e = (y[i] - yhat[i]);
+      s += e * e;
+    }
+    return Math.sqrt(s / n);
+  };
+
+  // 데이터 접근: TSData에서 Close 시계열 읽기 (없으면 예외)
+  function getCloseSeries() {
+    if (!window.TSData || !TSData.getAll) {
+      throw new Error('TSData가 초기화되지 않았습니다. data.js가 먼저 로드되어야 합니다.');
+    }
+    const { dates, close } = TSData.getAll();
+    if (!dates?.length || !close?.length) {
+      throw new Error('시계열 데이터가 비어 있습니다.');
+    }
+    return { dates, close };
+  }
+
+  // Chart.js 인스턴스
+  let statChart = null;
+  function renderChart(dates, actual, predStartIdx, preds) {
+    const predSeries = new Array(actual.length).fill(null);
+    for (let i = 0; i < preds.length; i++) {
+      predSeries[predStartIdx + i] = preds[i];
+    }
+    const ctx = document.getElementById('chart-stat');
+    if (statChart) statChart.destroy();
+    statChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [
+          {
+            label: '실제 Close',
+            data: actual,
+            borderWidth: 1.8,
+            tension: 0.15,
+          },
+          {
+            label: '예측',
+            data: predSeries,
+            borderWidth: 1.8,
+            borderDash: [6, 6],
+            tension: 0.15,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'bottom' },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${Number(ctx.parsed.y).toFixed(2)}` } }
+        },
+        scales: {
+          x: { ticks: { maxTicksLimit: 8 } },
+          y: { ticks: { callback: (v) => Number(v).toFixed(0) } }
+        }
       }
+    });
+  }
+
+  // ARIMA WASM 로더 보장
+  let ARIMAClass = null;
+  async function ensureARIMA() {
+    if (ARIMAClass) return ARIMAClass;
+    if (window.ARIMAPromise && typeof window.ARIMAPromise.then === 'function') {
+      ARIMAClass = await window.ARIMAPromise; // async 로더
+      return ARIMAClass;
     }
-    return M.map(row=> row[n]);
-  };
-
-  // ---------- AR fit/predict ----------
-  const fitAR = (y, p=2) => {
-    const X = [], Y = [];
-    for (let t=p;t<y.length;t++){
-      X.push([1, ...Array.from({length:p}, (_,k)=> y[t-k-1])]);
-      Y.push(y[t]);
+    // 혹시나 글로벌에 동기 ARIMA가 있으면 사용
+    if (window.ARIMA) {
+      ARIMAClass = window.ARIMA;
+      return ARIMAClass;
     }
-    const Xt = transpose(X);
-    const beta = solve(matmul(Xt, X), matvec(Xt, Y)); // [b0, b1..bp]
-    return { beta, p };
+    throw new Error('ARIMA 라이브러리를 불러오지 못했습니다. index.html의 arima/async.js 스크립트를 확인하세요.');
+  }
+
+  // 공통 실행기: 학습/예측/그리기/메트릭
+  async function runWithOptions(opts) {
+    const ARIMA = await ensureARIMA();
+    const { dates, close } = getCloseSeries();
+
+    const n = close.length;
+    if (n < 20) throw new Error('표본이 너무 적습니다(최소 20개 이상 권장).');
+
+    const split = Math.floor(n * 0.7);
+    const train = close.slice(0, split);
+    const test = close.slice(split);
+    const horizon = test.length;
+
+    // 학습
+    const model = new ARIMA({ verbose: false, ...opts }).train(train);
+
+    // 예측 (멀티스텝)
+    const [pred, _err] = model.predict(horizon);
+
+    // 지표
+    const M = {
+      mae: mae(test, pred),
+      rmse: rmse(test, pred)
+    };
+
+    // 차트
+    renderChart(dates, close, split, pred);
+
+    // 지표 출력
+    const $m = document.getElementById('stat-metrics');
+    $m.textContent = `MAE ${M.mae.toFixed(3)}  |  RMSE ${M.rmse.toFixed(3)}`;
+
+    return { pred, metrics: M, split };
+  }
+
+  // -------- 공개 API (버튼 핸들러에서 호출) --------
+  StatModels.runAR = async function (p = 2) {
+    return runSafe(() => runWithOptions({ p, d: 0, q: 0 }));
   };
-  const predictAR = (model, yInit, nSteps) => {
-    const { beta, p } = model;
-    const out = [];
-    const buf = yInit.slice(-p);
-    for (let i=0;i<nSteps;i++){
-      const x = [1, ...buf.slice().reverse()];
-      const yhat = dot(beta, x);
-      out.push(yhat);
-      buf.shift(); buf.push(yhat);
+  StatModels.runMA = async function (q = 2) {
+    return runSafe(() => runWithOptions({ p: 0, d: 0, q }));
+  };
+  StatModels.runARMA = async function (p = 2, q = 2) {
+    return runSafe(() => runWithOptions({ p, d: 0, q }));
+  };
+  StatModels.runARIMA = async function (p = 2, d = 1, q = 2) {
+    return runSafe(() => runWithOptions({ p, d, q }));
+  };
+  // SARIMA: UI엔 계절 주기(s)만 받고, 계절차수(P,D,Q)는 안전한 기본값 사용
+  StatModels.runSARIMA = async function (p = 1, d = 1, q = 1, s = 12) {
+    const seasonal = Number(s) > 0 ? { P: 1, D: Math.min(1, d), Q: 1, s: Number(s) } : {};
+    return runSafe(() => runWithOptions({ p, d, q, ...seasonal }));
+  };
+  // Auto-ARIMA: 간단한 탐색 상한 (p,d,q)≤(5,2,5), (P,D,Q)≤(2,1,2)
+  StatModels.runAutoARIMA = async function (s = 0) {
+    const seasonal = Number(s) > 0 ? { P: 2, D: 1, Q: 2, s: Number(s) } : {};
+    return runSafe(() => runWithOptions({ auto: true, p: 5, d: 2, q: 5, ...seasonal }));
+  };
+
+  async function runSafe(fn) {
+    const btns = document.querySelectorAll('#tab-stat button[id^="btn-run-"]');
+    btns.forEach(b => b.disabled = true);
+    try {
+      return await fn();
+    } catch (err) {
+      console.error(err);
+      alert('모델 실행 중 오류: ' + err.message);
+    } finally {
+      btns.forEach(b => b.disabled = false);
     }
-    return out;
-  };
-
-  // ---------- MA naive ----------
-  const predictMA = (y, q=2, nSteps=1) => {
-    const out=[]; const buf = y.slice();
-    for (let i=0;i<nSteps;i++){
-      const win = buf.slice(-q);
-      const yhat = win.reduce((a,b)=>a+b,0)/Math.max(win.length,1);
-      out.push(yhat); buf.push(yhat);
-    }
-    return out;
-  };
-
-  // ---------- wrappers (7:3 split) ----------
-  const split73 = (dates, y) => {
-    const n = y.length, cut = Math.floor(n*0.7);
-    return { datesTr: dates.slice(0,cut), yTr: y.slice(0,cut), datesTe: dates.slice(cut), yTe: y.slice(cut) };
-  };
-
-  const runAR = (dates, y, p=2) => {
-    const { datesTr, yTr, datesTe, yTe } = split73(dates, y);
-    const model = fitAR(yTr, p);
-    const yHat = predictAR(model, yTr, yTe.length);
-    return { labels: datesTe, yTrue: yTe, yHat };
-  };
-
-  const runMA = (dates, y, q=2) => {
-    const { datesTr, yTr, datesTe, yTe } = split73(dates, y);
-    const yHat = predictMA(yTr, q, yTe.length);
-    return { labels: datesTe, yTrue: yTe, yHat };
-  };
-
-  const runARMA = (dates, y, p=2, q=2) => {
-    const { datesTr, yTr, datesTe, yTe } = split73(dates, y);
-    const model = fitAR(yTr, p);
-    const arPred = predictAR(model, yTr, yTe.length);
-    // 간단히: 훈련 잔차 평균을 보정값으로 추가(naive MA)
-    const X = [], Y = [];
-    for (let t=p;t<yTr.length;t++){
-      X.push([1, ...Array.from({length:p}, (_,k)=> yTr[t-k-1])]);
-      Y.push(yTr[t]);
-    }
-    const Xt = transpose(X), beta = model.beta;
-    const yFit = X.map(x=> dot(beta, x));
-    const resid = Y.map((v,i)=> v - yFit[i]);
-    const bias = resid.reduce((a,b)=>a+b,0)/Math.max(resid.length,1);
-    const yHat = arPred.map(v=> v + bias);
-    return { labels: datesTe, yTrue: yTe, yHat };
-  };
-
-  const difference = (y, d=1) => {
-    let out = y.slice();
-    for (let k=0;k<d;k++) out = out.slice(1).map((v,i)=> v - out[i]);
-    return out;
-  };
-
-  const integrate = (yDiff, lastOrig, d=1) => {
-    let out = yDiff.slice();
-    let base = lastOrig;
-    for (let k=0;k<d;k++){
-      const tmp = [];
-      for (let i=0;i<out.length;i++){
-        base = base + out[i];
-        tmp.push(base);
-      }
-      out = tmp; // now at one lower diff order
-    }
-    return out;
-  };
-
-  const runARIMA = (dates, y, p=2, d=1, q=2) => {
-    const { datesTr, yTr, datesTe, yTe } = split73(dates, y);
-    const yTrDiff = d>0 ? difference(yTr, d) : yTr.slice();
-    const model = fitAR(yTrDiff, p);
-    const yDiffHat = predictAR(model, yTrDiff, yTe.length);
-    const lastOrig = yTr.slice(-d)[0] ?? yTr[yTr.length-1];
-    const yHat = d>0 ? integrate(yDiffHat, lastOrig, d) : yDiffHat;
-    return { labels: datesTe, yTrue: yTe, yHat };
-  };
-
-  const seasonalDifference = (y, s=0) => {
-    if (!s || s<=0) return y.slice();
-    const out = [];
-    for (let i=s;i<y.length;i++) out.push(y[i]-y[i-s]);
-    return out;
-  };
-  const seasonalIntegrate = (yDiff, history, s=0) => {
-    if (!s || s<=0) return yDiff.slice();
-    const out = []; const buf = history.slice(); // use last s original
-    for (let i=0;i<yDiff.length;i++){
-      const yhat = yDiff[i] + (buf[buf.length - s] ?? buf[buf.length-1] ?? 0);
-      out.push(yhat);
-      buf.push(yhat);
-    }
-    return out;
-  };
-
-  const runSARIMA = (dates, y, p=2, d=1, q=2, s=0) => {
-    const { datesTr, yTr, datesTe, yTe } = split73(dates, y);
-    const yTrSd = seasonalDifference(yTr, s);
-    const yTrSdd = d>0 ? difference(yTrSd, d) : yTrSd;
-    const model = fitAR(yTrSdd, p);
-    const ySddHat = predictAR(model, yTrSdd, yTe.length);
-    const lastSeasonHist = yTr.slice(-s) || yTr.slice(-1);
-    const ySdHat = d>0 ? integrate(ySddHat, yTrSd.slice(-1)[0] ?? yTr[yTr.length-1], d) : ySddHat;
-    const yHat = seasonalIntegrate(ySdHat, lastSeasonHist, s);
-    return { labels: datesTe, yTrue: yTe, yHat };
-  };
-
-  return { runAR, runMA, runARMA, runARIMA, runSARIMA };
+  }
 })();
