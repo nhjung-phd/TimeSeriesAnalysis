@@ -94,11 +94,11 @@
       ARIMAClass = window.ARIMA;
       return ARIMAClass;
     }
-    // 3) 둘 다 없으면, 여기서 직접 ESM으로 불러오기 (자동 복구)
+    // 3) 둘 다 없으면, ESM로 최후의 수단(CDN) 시도
     try {
       const mod = await import('https://cdn.jsdelivr.net/npm/arima@0.2.5/async.js/+esm');
       const maybePromise = (mod && 'default' in mod) ? mod.default : mod;
-      ARIMAClass = await maybePromise;   // async.js는 Promise로 ARIMA 클래스를 넘깁니다.
+      ARIMAClass = await maybePromise;
       return ARIMAClass;
     } catch (e) {
       console.error(e);
