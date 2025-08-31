@@ -59,27 +59,100 @@
 
     <!-- 2) 시계열분석 -->
     <section id="tab-ts" class="content-section">
-      <!-- (이전과 동일, 생략) -->
+      <div class="subgrid">
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">이동평균법 & 지수평활법</h3>
+          <div class="flex gap-2 mb-2">
+            <input id="ma-window" type="number" min="2" value="20" class="border rounded px-2 py-1 w-24" />
+            <input id="es-alpha" type="number" step="0.05" min="0.05" max="0.95" value="0.3" class="border rounded px-2 py-1 w-24" />
+            <button id="btn-ma-es" class="bg-blue-600 text-white px-3 py-1 rounded">적용</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-ma-es"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">요소분해 (추세/계절/불규칙)</h3>
+          <div class="flex gap-2 mb-2">
+            <input id="decomp-season" type="number" min="2" value="20" class="border rounded px-2 py-1 w-28" />
+            <button id="btn-decomp" class="bg-indigo-600 text-white px-3 py-1 rounded">분해</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-decomp"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">자기상관 (ACF/PACF)</h3>
+          <div class="flex gap-2 mb-2">
+            <input id="acf-lag" type="number" min="5" value="30" class="border rounded px-2 py-1 w-24" />
+            <button id="btn-acf" class="bg-emerald-600 text-white px-3 py-1 rounded">계산</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-acf"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">정상성 검사</h3>
+          <p class="text-xs text-slate-500 mb-2">평균·분산·자기상관의 시간변화로 직관 점검 (간이판정)</p>
+          <div class="flex gap-2 mb-2">
+            <input id="stat-window" type="number" min="10" value="60" class="border rounded px-2 py-1 w-24" />
+            <button id="btn-stationarity" class="bg-rose-600 text-white px-3 py-1 rounded">검사</button>
+            <span id="stat-result" class="pill">대기</span>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-stationarity"></canvas></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-2">차분/평활화 빠른 적용</h3>
+          <div class="flex gap-2 mb-2">
+            <button id="btn-diff1" class="border px-3 py-1 rounded">1차 차분</button>
+            <button id="btn-smooth" class="border px-3 py-1 rounded">평활화(윈도 5)</button>
+            <button id="btn-reset-ts" class="border px-3 py-1 rounded">원복</button>
+          </div>
+          <div class="chart-wrap"><canvas id="chart-transform"></canvas></div>
+        </div>
+      </div>
     </section>
 
     <!-- 3) 통계모델 -->
     <section id="tab-stat" class="content-section">
-      <!-- (이전과 동일, 생략) -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2">AR / MA / ARMA / ARIMA / SARIMA (데모)</h3>
+        <p class="text-xs text-slate-500 mb-3">7:3 분할로 학습·예측 후 실제와 비교합니다. (간이 구현)</p>
+        <div class="flex flex-wrap gap-2 mb-3">
+          <label class="text-sm">AR(p) <input id="ar-p" type="number" min="1" value="2" class="border rounded px-2 py-1 w-20"></label>
+          <label class="text-sm">MA(q) <input id="ma-q" type="number" min="1" value="2" class="border rounded px-2 py-1 w-20"></label>
+          <label class="text-sm">ARIMA(p,d,q) d=<input id="arima-d" type="number" min="0" value="1" class="border rounded px-2 py-1 w-16"></label>
+          <label class="text-sm">계절 s=<input id="season-s" type="number" min="0" value="0" class="border rounded px-2 py-1 w-20"></label>
+          <button id="btn-run-ar"    class="bg-blue-600 text-white px-3 py-1 rounded">AR</button>
+          <button id="btn-run-ma"    class="bg-emerald-600 text-white px-3 py-1 rounded">MA</button>
+          <button id="btn-run-arma"  class="bg-indigo-600 text-white px-3 py-1 rounded">ARMA</button>
+          <button id="btn-run-arima" class="bg-rose-600 text-white px-3 py-1 rounded">ARIMA</button>
+          <button id="btn-run-sarima" class="bg-slate-700 text-white px-3 py-1 rounded">SARIMA</button>
+        </div>
+        <div class="chart-wrap"><canvas id="chart-stat"></canvas></div>
+        <p id="stat-metrics" class="text-xs text-slate-500 mt-2">MAE / RMSE</p>
+      </div>
     </section>
 
     <!-- 4) 머신러닝 -->
     <section id="tab-ml" class="content-section">
-      <!-- (이전과 동일, 생략) -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2">머신러닝 (데모)</h3>
+        <p class="text-sm text-slate-600 mb-3">향후: 특징공학 기반 예측 추가</p>
+        <div class="chart-wrap"><canvas id="chart-ml"></canvas></div>
+      </div>
     </section>
 
     <!-- 5) 딥러닝 -->
     <section id="tab-dl" class="content-section">
-      <!-- (이전과 동일, 생략) -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2">딥러닝 LSTM (TF.js)</h3>
+        <p id="lstm-status" class="text-xs text-slate-500 mb-2">준비됨.</p>
+        <div class="chart-wrap"><canvas id="chart-lstm"></canvas></div>
+        <button id="btn-lstm" class="w-full bg-rose-600 text-white py-2 rounded">LSTM 학습 & 예측</button>
+      </div>
     </section>
 
     <!-- 6) 최신 -->
     <section id="tab-latest" class="content-section">
-      <!-- (이전과 동일, 생략) -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-2">Transformer (데모)</h3>
+        <div class="chart-wrap"><canvas id="chart-transformer"></canvas></div>
+      </div>
     </section>
   </div>
 
