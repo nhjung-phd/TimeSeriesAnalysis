@@ -1,5 +1,5 @@
 // js/models/stat_models.js
-// AR/MA/ARMA/ARIMA/SARIMA (7:3 split)
+// AR / MA / ARMA / ARIMA / SARIMA (7:3 split)
 // 의존: Chart.js, TS_STATE (app.js), TSData (data.js)
 
 (function () {
@@ -18,18 +18,7 @@
     return { dates: TS_STATE.dates, close: TS_STATE.close };
   }
 
-  // 최소자승 AR(p)
-  function fitAR(train, p){
-    const n = train.length;
-    const rows = n - p;
-    const X = Array.from({length: rows}, (_,i)=> train.slice(i, i+p).reverse());
-    const y = train.slice(p);
-    const XT = transpose(X);
-    const XTX = matMul(XT, X);
-    const XTy = vecMul(XT, y);
-    const beta = solve(XTX, XTy);
-    return beta; // [phi1..phip]
-  }
+  // ---------- 선형대수 도우미 ----------
   function transpose(A){ return A[0].map((_,j)=>A.map(row=>row[j])); }
   function matMul(A,B){
     const r=A.length, c=B[0].length, k=B.length;
@@ -51,21 +40,24 @@
     return M.map(row=>row[n]);
   }
 
-  // MA(q) — 단순 이동평균 예측
-  function predictMA(train, testLen, q){
-    const full = train.slice();
-    const preds = [];
-    for(let t=0;t<testLen;t++){
-      const base = full.slice(-q);
-      const yhat = mean(base);
-      preds.push(yhat);
-      full.push(yhat);
-    }
-    return preds;
+  // ---------- AR/MA/ARMA ----------
+  // 최소자승 AR(p) 적합
+  function fitAR(train, p){
+    const n = train.length;
+    const rows = n - p;
+    if (rows <= 0) return new Array(p).fill(0);
+    const X = Array.from({length: rows}, (_,i)=> train.slice(i, i+p).reverse());
+    const y = train.slice(p);
+    const XT = transpose(X);
+    const XTX = matMul(XT, X);
+    const XTy = vecMul(XT, y);
+    const beta = solve(XTX, XTy);
+    return beta; // [phi1..phip]
   }
 
-  // AR(p)
+  // AR(p) one-step 예측(롤링 업데이트)
   function predictAR(train, test, p){
+    if (p <= 0) return new Array(test.length).fill(train[train.length-1]);
     const phi = fitAR(train, p);
     const history = train.slice();
     const preds = [];
@@ -74,6 +66,19 @@
       for(let i=1;i<=p;i++) yhat += phi[i-1] * history[history.length - i];
       preds.push(yhat);
       history.push(test[t]); // one-step 업데이트
+    }
+    return preds;
+  }
+
+  // MA(q) — 단순(잔차가 아니라) 최근 q값 평균으로 근사
+  function predictMA(train, testLen, q){
+    const full = train.slice();
+    const preds = [];
+    for(let t=0;t<testLen;t++){
+      const base = full.slice(-q);
+      const yhat = mean(base);
+      preds.push(yhat);
+      full.push(yhat);
     }
     return preds;
   }
@@ -107,10 +112,13 @@
     return preds;
   }
 
-  // 차분/복원
+  // ---------- (계절)차분/복원 ----------
   function diffN(arr, d){
     let out = arr.slice();
-    for(let k=0;k<d;k++) out = TSData.diff(out, 1);
+    for(let k=0;k<d;k++){
+      const tmp=[]; for(let i=1;i<out.length;i++) tmp.push(out[i]-out[i-1]);
+      out = tmp;
+    }
     return out;
   }
   function undiffN(lastValues, diffs, d){
@@ -119,12 +127,13 @@
     const first = diffs.map(dv => (prev = prev + dv));
     return first;
   }
-
-  // 계절 차분/복원
   function sdiff(arr, s){
-    const out=[]; for(let i=s;i<arr.length;i++) out.push(arr[i]-arr[i-s]); return out;
+    if (!s || s<=0) return arr.slice();
+    const out=[]; for(let i= s; i<arr.length; i++) out.push(arr[i]-arr[i-s]);
+    return out;
   }
   function undiffS(lastSeason, diffs, s){
+    if (!s || s<=0) return diffs.slice();
     const out=[]; const hist=lastSeason.slice();
     for(let i=0;i<diffs.length;i++){
       const y = diffs[i] + hist[hist.length - s];
@@ -133,11 +142,13 @@
     return out;
   }
 
-  // 공용 렌더
+  // ---------- 공용 차트 렌더 ----------
   let statChart=null;
   function renderChartAndMetrics(dates, y, splitIdx, preds, name){
+    // 예측 시점에 맞춰 패딩
     const padded = new Array(y.length).fill(null);
     for(let i=0;i<preds.length;i++) padded[splitIdx+i] = preds[i];
+
     const ctx = document.getElementById('chart-stat').getContext('2d');
     if (statChart) statChart.destroy();
     statChart = new Chart(ctx,{
@@ -151,6 +162,7 @@
       },
       options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}}
     });
+
     const maeV = mae(y.slice(splitIdx), preds).toFixed(3);
     const rmseV = rmse(y.slice(splitIdx), preds).toFixed(3);
     const mEl = document.getElementById('stat-metrics');
@@ -165,6 +177,7 @@
     const test  = y.slice(split);
     const preds = predictAR(train, test, Math.max(1, p));
     renderChartAndMetrics(dates, y, split, preds, `AR(${p})`);
+    return { labels: dates.slice(split), yTrue: test, yHat: preds };
   };
 
   StatModels.runMA = async function(q=2){
@@ -174,6 +187,7 @@
     const test  = y.slice(split);
     const preds = predictMA(train, test.length, Math.max(1, q));
     renderChartAndMetrics(dates, y, split, preds, `MA(${q}) (SMA)`);
+    return { labels: dates.slice(split), yTrue: test, yHat: preds };
   };
 
   StatModels.runARMA = async function(p=2, q=2){
@@ -183,6 +197,7 @@
     const test  = y.slice(split);
     const preds = predictARMA(train, test, Math.max(0,p), Math.max(0,q));
     renderChartAndMetrics(dates, y, split, preds, `ARMA(${p},${q}) (approx)`);
+    return { labels: dates.slice(split), yTrue: test, yHat: preds };
   };
 
   StatModels.runARIMA = async function(p=2, d=1, q=2){
@@ -201,14 +216,14 @@
     const lastVals = y.slice(split - dN, split);
     const preds = dN>0 ? undiffN(lastVals, predsDiff, dN) : predsDiff;
 
-    renderChartAndMetrics(dates, y, split, preds.slice(0, test.length), `ARIMA(${p},${d},${q}) (approx)`);
+    const yHat = preds.slice(0, test.length);
+    renderChartAndMetrics(dates, y, split, yHat, `ARIMA(${p},${d},${q}) (approx)`);
+    return { labels: dates.slice(split), yTrue: test, yHat };
   };
 
-  // SARIMA: 내부 유틸과 일관되게 재구현
-  StatModels.runSARIMA = async function(tsState, p=2, d=1, q=2, s=0){
-    const { dates, close: y } = tsState;
-    if (!dates || !y || dates.length===0) { console.error('SARIMA: 데이터가 없습니다.'); return null; }
-
+  // SARIMA: 비계절(d), 계절(s) 차분 후 ARMA 근사, 역복원
+  StatModels.runSARIMA = async function(p=2, d=1, q=2, s=0){
+    const { dates, close: y } = getSeries();
     const split = Math.floor(y.length*0.7);
     const test  = y.slice(split);
 
@@ -216,21 +231,22 @@
     const sN = Math.max(0, s|0);
 
     // 1) 비계절 차분
-    const yD = dN>0 ? diffN(y, dN) : y.slice();            // 길이 N - d
+    const yD = dN>0 ? diffN(y, dN) : y.slice();
     // 2) 계절 차분
-    const yDS = sN>0 ? sdiff(yD, sN) : yD;                 // 길이 N - d - s
-    // 차분된 공간에서의 split 인덱스
-    const splitDS = yDS.length - test.length;              // = split - d - s (유도)
+    const yDS = sN>0 ? sdiff(yD, sN) : yD;
 
+    // 차분된 공간에서의 split 인덱스 = (원본 split) - d - s
+    const splitDS = yDS.length - test.length;
     const trainDS = yDS.slice(0, splitDS);
     const testDS  = yDS.slice(splitDS);
 
-    // ARMA 예측 (차분 공간)
+    // ARMA 예측(차분 공간) — 여기선 AR(p) + 잔차평균 q
     const predsDiff = predictARMA(trainDS, testDS, Math.max(0,p), Math.max(0,q));
 
-    // 3) 계절 복원: lastSeason은 yD의 [splitDS .. splitDS+s-1] (길이 s)
+    // 3) 계절 복원
     let restored = predsDiff.slice();
     if (sN>0){
+      // 비계절 차분된 yD에서 splitDS 이후의 최근 s개를 계절 기준으로 사용
       let lastSeason = yD.slice(splitDS, splitDS + sN);
       if (lastSeason.length < sN){
         const need = sN - lastSeason.length;
@@ -239,15 +255,12 @@
       restored = undiffS(lastSeason, predsDiff, sN);
     }
 
-    // 4) 비계절 복원: 원시 y에서 split 직전 d개
+    // 4) 비계절 복원
     const lastVals = y.slice(split - dN, split);
     const preds = dN>0 ? undiffN(lastVals, restored, dN) : restored;
 
-    // app.js에서 커스텀 렌더를 하므로 결과 반환
-    return {
-      labels: dates.slice(split),
-      yTrue : y.slice(split),
-      yHat  : preds.slice(0, test.length)
-    };
+    const yHat = preds.slice(0, test.length);
+    renderChartAndMetrics(dates, y, split, yHat, `SARIMA(${p},${d},${q}) s=${s} (approx)`);
+    return { labels: dates.slice(split), yTrue: test, yHat };
   };
 })();
