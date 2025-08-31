@@ -290,14 +290,38 @@ const _needTS = () => {
 
   // ACF/PACF (ID: btn-acf 로 수정)
   document.getElementById('btn-acf').addEventListener('click', ()=>{
-    if (needData()) return;
-    const lags = parseInt(document.getElementById('acf-lag').value || '30');
-    const acfData  = TSData.acf(TS_STATE.close, lags);
-    const pacfData = TSData.pacf_yw(TS_STATE.close, lags);
-    const labels = Array.from({length: lags+1}, (_,i)=>i);
-    Charts.acf(document.getElementById('chart-acf').getContext('2d'),  labels, acfData,  'ACF');
-    Charts.acf(document.getElementById('chart-pacf').getContext('2d'), labels, pacfData, 'PACF');
+  const btn = document.getElementById('btn-acf');
+  const cvACF  = document.getElementById('chart-acf');
+  const cvPACF = document.getElementById('chart-pacf');
+  if (!btn || !cvACF || !cvPACF) return;
+
+  let acfChart  = null;
+  let pacfChart = null;
+
+  btn.addEventListener('click', () => {
+    if (!TS_STATE?.close?.length) { alert('먼저 CSV를 로드하세요.'); return; }
+    const L = Math.max(1, parseInt(document.getElementById('acf-lag').value || '30', 10));
+    const labels = Array.from({length: L+1}, (_,i)=>i);
+    const acf  = TSData.acf(TS_STATE.close, L);
+    const pacf = TSData.pacf_yw(TS_STATE.close, L);
+
+    // ACF
+    if (acfChart) acfChart.destroy();
+    acfChart = new Chart(cvACF.getContext('2d'), {
+      type:'bar',
+      data:{ labels, datasets:[{ label:'ACF', data:acf, backgroundColor:'rgba(59,130,246,.5)' }]},
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom'}, title:{display:true, text:'ACF'} } }
+    });
+
+    // PACF
+    if (pacfChart) pacfChart.destroy();
+    pacfChart = new Chart(cvPACF.getContext('2d'), {
+      type:'bar',
+      data:{ labels, datasets:[{ label:'PACF', data:pacf, backgroundColor:'rgba(16,185,129,.5)' }]},
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom'}, title:{display:true, text:'PACF'} } }
+    });
   });
+})();
 
   // 통계모델: 버튼 리스너 추가
   const readInt = (id, def)=> parseInt(document.getElementById(id).value || String(def));
