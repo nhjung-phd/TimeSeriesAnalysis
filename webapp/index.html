@@ -8,22 +8,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
-
-<!-- (추가) 로컬 ARIMA 비동기 로더 -->
-<!-- ESM로 로드 (esm.sh 경유) -->
-<script type="module">
-  import ARIMAFactory from "https://esm.sh/arima/async";
-
-  // wasm의 실제 위치를 알려줘야 합니다(이 예시는 jsDelivr의 원본 wasm 사용)
-  window.ARIMAPromise = ARIMAFactory({
-    locateFile: (path) => {
-      if (path.endsWith(".wasm")) {
-        return "https://cdn.jsdelivr.net/npm/arima/arima.wasm";
-      }
-      return path;
-    }
-  });
-</script>
   <style>
     body{background:#f8fafc}
     .tab-btn.active{color:#2563eb;border-bottom:2px solid #2563eb;font-weight:600}
@@ -77,10 +61,9 @@
       </div>
     </section>
 
-    <!-- 2) 시계열분석 (생략: 기존 소스 유지) -->
+    <!-- 2) 시계열분석 -->
     <section id="tab-ts" class="content-section">
       <div class="subgrid">
-        <!-- 기존 카드들 유지 -->
         <div class="bg-white p-6 rounded-lg shadow">
           <h3 class="text-lg font-semibold mb-2">이동평균법 & 지수평활법</h3>
           <div class="flex gap-2 mb-2">
@@ -90,8 +73,6 @@
           </div>
           <div class="chart-wrap"><canvas id="chart-ma-es"></canvas></div>
         </div>
-
-        <!-- (다른 카드들도 기존 그대로) -->
         <div class="bg-white p-6 rounded-lg shadow">
           <h3 class="text-lg font-semibold mb-2">요소분해 (추세/계절/불규칙)</h3>
           <div class="flex gap-2 mb-2">
@@ -100,7 +81,6 @@
           </div>
           <div class="chart-wrap"><canvas id="chart-decomp"></canvas></div>
         </div>
-
         <div class="bg-white p-6 rounded-lg shadow">
           <h3 class="text-lg font-semibold mb-2">자기상관 (ACF/PACF)</h3>
           <div class="flex gap-2 mb-2">
@@ -109,7 +89,6 @@
           </div>
           <div class="chart-wrap"><canvas id="chart-acf"></canvas></div>
         </div>
-
         <div class="bg-white p-6 rounded-lg shadow">
           <h3 class="text-lg font-semibold mb-2">정상성 검사</h3>
           <p class="text-xs text-slate-500 mb-2">평균·분산·자기상관의 시간변화로 직관 점검 (간이판정)</p>
@@ -120,7 +99,6 @@
           </div>
           <div class="chart-wrap"><canvas id="chart-stationarity"></canvas></div>
         </div>
-
         <div class="bg-white p-6 rounded-lg shadow">
           <h3 class="text-lg font-semibold mb-2">차분/평활화 빠른 적용</h3>
           <div class="flex gap-2 mb-2">
@@ -136,19 +114,18 @@
     <!-- 3) 통계모델 -->
     <section id="tab-stat" class="content-section">
       <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-xl font-semibold mb-2">AR / MA / ARMA / ARIMA / SARIMA / Auto-ARIMA</h3>
+        <h3 class="text-xl font-semibold mb-2">AR / MA / ARMA / ARIMA / SARIMA</h3>
         <p class="text-xs text-slate-500 mb-3">7:3 분할로 학습·예측 후 실제와 비교합니다.</p>
         <div class="flex flex-wrap gap-2 mb-3">
-          <label class="text-sm">AR(p) <input id="ar-p" type="number" min="0" value="2" class="border rounded px-2 py-1 w-20"></label>
-          <label class="text-sm">MA(q) <input id="ma-q" type="number" min="0" value="2" class="border rounded px-2 py-1 w-20"></label>
+          <label class="text-sm">AR(p) <input id="ar-p" type="number" min="1" value="2" class="border rounded px-2 py-1 w-20"></label>
+          <label class="text-sm">MA(q) <input id="ma-q" type="number" min="1" value="2" class="border rounded px-2 py-1 w-20"></label>
           <label class="text-sm">ARIMA(p,d,q) d=<input id="arima-d" type="number" min="0" value="1" class="border rounded px-2 py-1 w-16"></label>
           <label class="text-sm">계절 s=<input id="season-s" type="number" min="0" value="0" class="border rounded px-2 py-1 w-20"></label>
-          <button id="btn-run-ar"     class="bg-blue-600 text-white px-3 py-1 rounded">AR</button>
-          <button id="btn-run-ma"     class="bg-emerald-600 text-white px-3 py-1 rounded">MA</button>
-          <button id="btn-run-arma"   class="bg-indigo-600 text-white px-3 py-1 rounded">ARMA</button>
-          <button id="btn-run-arima"  class="bg-rose-600 text-white px-3 py-1 rounded">ARIMA</button>
+          <button id="btn-run-ar"    class="bg-blue-600 text-white px-3 py-1 rounded">AR</button>
+          <button id="btn-run-ma"    class="bg-emerald-600 text-white px-3 py-1 rounded">MA</button>
+          <button id="btn-run-arma"  class="bg-indigo-600 text-white px-3 py-1 rounded">ARMA</button>
+          <button id="btn-run-arima" class="bg-rose-600 text-white px-3 py-1 rounded">ARIMA</button>
           <button id="btn-run-sarima" class="bg-slate-700 text-white px-3 py-1 rounded">SARIMA</button>
-          <button id="btn-run-auto"   class="bg-amber-600 text-white px-3 py-1 rounded">AUTO&nbsp;ARIMA</button>
         </div>
         <div class="chart-wrap"><canvas id="chart-stat"></canvas></div>
         <p id="stat-metrics" class="text-xs text-slate-500 mt-2">MAE / RMSE</p>
