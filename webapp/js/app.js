@@ -58,23 +58,34 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   };
 
   // 기본 CSV 자동 로드
-  try{
-    const res = await fetch('./tsla_sample.csv');
-    if (!res.ok) throw new Error('기본 CSV 파일을 찾을 수 없습니다.');
-    const text = await res.text();
-    const { dates, closes } = TSData.parseCSVDateClose(text);
-    TS_STATE = { dates, close: closes };
-    const chart = ensurePrepChart();
-    chart.data.labels = dates;
-    chart.data.datasets[0].data = closes;
-    chart.update();
-    preStart.value = dates[0];
-    preEnd.value   = dates[dates.length-1];
-    if (csvInfo) csvInfo.textContent = `샘플 로드: tsla_sample.csv (${dates.length} points)`;
-  }catch(e){
-    console.warn(e);
-    if (csvInfo) csvInfo.textContent = '샘플 로딩 실패: CSV를 직접 업로드하세요.';
-  }
+// (상단 any import들 뒤 적당한 위치)
+const CSV_PATH = './webapp/data/tsla_sample.csv';  // ✅ 기본 CSV 경로
+
+// --- 기본 CSV 자동 로드 ---
+try {
+  const res = await fetch(CSV_PATH);
+  if (!res.ok) throw new Error('기본 CSV 파일을 찾을 수 없습니다.');
+  const text = await res.text();
+  const { dates, closes } = TSData.parseCSVDateClose(text);
+  window.TS_STATE = { dates, close: closes };
+
+  const chart = ensurePrepChart();
+  chart.data.labels = dates;
+  chart.data.datasets[0].data = closes;
+  chart.update();
+
+  preStart.value = dates[0];
+  preEnd.value   = dates[dates.length - 1];
+
+  // csv-info 요소가 없는 경우를 대비한 널가드
+  const infoEl = document.getElementById('csv-info');
+  if (infoEl) infoEl.textContent = `샘플 로드: ${CSV_PATH} (${dates.length} points)`;
+} catch (e) {
+  console.warn(e);
+  const infoEl = document.getElementById('csv-info');
+  if (infoEl) infoEl.textContent = `샘플 로딩 실패: ${CSV_PATH} 를 확인하거나 직접 업로드하세요.`;
+}
+
 
   // 파일 업로드 (ID: pre-file 로 수정)
   document.getElementById('pre-file').addEventListener('change', async (e)=>{
