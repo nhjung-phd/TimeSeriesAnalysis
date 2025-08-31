@@ -272,45 +272,58 @@
     renderChartAndMetrics(dates, y, split, preds, `ARIMA(${p},${d},${q}) (approx)`);
   };
 
-  StatModels.runSARIMA = async function(p=2, d=1, q=2, s=0){
-    const {dates, close:y} = getSeries();
-    const split = Math.floor(y.length*0.7);
-    const train = y.slice(0, split);
-    const test  = y.slice(split);
+  // StatModels.runSARIMA 함수를 찾아서 아래 코드로 교체해주세요.
+  StatModels.runSARIMA = async function(tsState, p = 2, d = 1, q = 2, s = 0) {
+    const { dates, close: y } = tsState;
+    if (!dates || !y || dates.length === 0) {
+      console.error("SARIMA: 데이터가 없습니다.");
+      return null;
+    }
 
-    const dN = Math.max(0, d|0);
-    const sN = Math.max(0, s|0);
+    const split = Math.floor(y.length * 0.7);
+    const train = y.slice(0, split);
+    const test = y.slice(split);
+
+    const dN = Math.max(0, d | 0);
+    const sN = Math.max(0, s | 0);
 
     // 비계절 차분
-    const yD = dN>0 ? diffN(y, dN) : y.slice();
+    const yD = dN > 0 ? diffN(y, dN) : y.slice();
 
     // 계절 차분
     let yDS = yD.slice();
     let splitDSIndex = yD.length - test.length;
     let lastSeasonBase = [];
-    if (sN>0){
+    if (sN > 0) {
       yDS = sdiff(yD, sN);
-      // test 길이 동일하도록 split 위치 재계산
       splitDSIndex = yDS.length - (test.length);
-      // 복원을 위해 split 직전 s개 보관
       lastSeasonBase = yD.slice(splitDSIndex, splitDSIndex + sN);
-      if (lastSeasonBase.length < sN){
-        // 부족하면 앞에서 채움
+      if (lastSeasonBase.length < sN) {
         const need = sN - lastSeasonBase.length;
-        lastSeasonBase = yD.slice(0, sN);
+        lastSeasonBase = yD.slice(splitDSIndex - need, splitDSIndex).concat(lastSeasonBase);
       }
     }
 
     const trainDS = yDS.slice(0, splitDSIndex);
-    const testDS  = yDS.slice(splitDSIndex);
-
-    const predsDS = predictARMA(trainDS, testDS, Math.max(0,p), Math.max(0,q));
-
-    // 계절 복원 → 비계절 복원
-    let predsD = sN>0 ? undiffS(lastSeasonBase, predsDS, sN) : predsDS;
+    const coefs = fitARMA(trainDS, p, q);
+    const predsDiff = predictARMA(coefs, trainDS, test.length);
     const lastVals = y.slice(split - dN, split);
-    const preds = dN>0 ? undiffN(lastVals, predsD, dN) : predsD;
 
-    renderChartAndMetrics(dates, y, split, preds, `SARIMA(${p},${d},${q}) s=${s} (approx)`);
+    // 예측값을 원본 스케일로 복원
+    let preds = predsDiff;
+    if (sN > 0) {
+      preds = sundiff(lastSeasonBase, predsDiff, sN).slice(sN);
+    }
+    if (dN > 0) {
+      preds = undiffN(lastVals, preds, dN);
+    }
+
+    // 기존 renderChartAndMetrics 호출을 삭제하고, 결과를 객체로 반환합니다.
+    // renderChartAndMetrics(dates, y, split, preds, `ARIMA(${p},${d},${q}) (approx)`);
+    return {
+      labels: dates.slice(split),
+      yTrue: y.slice(split),
+      yHat: preds.slice(0, test.length) // 예측 길이를 테스트 데이터 길이에 맞춤
+    };
   };
 })();
