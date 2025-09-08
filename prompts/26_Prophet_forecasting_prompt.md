@@ -38,17 +38,53 @@ plt.rcParams["figure.figsize"] = (12,5)
 ### 📌 예제 코드
 
 ```python
-# 1) TSLA 데이터 (최근 2년)
-df = yf.download("TSLA", period="2y", interval="1d")
+import yfinance as yf
+import pandas as pd
 
-# 2) 결측치/이상치 간단 처리 (결측 보간)
-df = df.dropna(subset=["Close"]).copy()
+# 1) TSLA 다운로드 - 컬럼을 단일 레벨로 강제(group_by='column')
+df = yf.download(
+    "TSLA",
+    period="2y",
+    interval="1d",
+    group_by="column",   # <- 중요: 컬럼을 Open/High/Low/Close 단일 레벨로
+    auto_adjust=False,
+    actions=False,
+    progress=False,
+)
 
-# 3) 종가 시각화
+# 2) 방어 코드: 빈 DF면 중단
+if df is None or df.empty:
+    raise RuntimeError("yfinance가 빈 데이터를 반환했습니다. 네트워크/기간/인터벌을 확인하세요.")
+
+# 3) 혹시라도 MultiIndex가 남아있으면 평탄화
+if isinstance(df.columns, pd.MultiIndex):
+    df.columns = ["_".join([str(c) for c in col if c]) for col in df.columns]
+
+# 4) Close 컬럼 확보 (예: 'TSLA_Close' 같은 이름도 커버)
+close_candidates = [c for c in df.columns if c.lower().endswith("close")]
+if not close_candidates:
+    # 대안 경로: Ticker API 사용
+    alt = yf.Ticker("TSLA").history(period="2y", interval="1d")
+    if alt is None or alt.empty or "Close" not in alt.columns:
+        raise KeyError(f"'Close' 컬럼을 찾지 못했습니다. 현재 컬럼: {list(df.columns)}")
+    df = alt.copy()
+    close_col = "Close"
+else:
+    close_col = close_candidates[0]
+
+# 5) 최종 표준화: 반드시 'Close' 단일 컬럼을 보장
+df = df.rename(columns={close_col: "Close"})
+df = df[["Close"]].dropna().copy()
+df.index = pd.to_datetime(df.index).tz_localize(None)  # Prophet 호환용 tz 제거
+
+# (선택) 시각화
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12,5))
 plt.plot(df.index, df["Close"], label="Tesla Close", color="black")
 plt.title("Tesla Stock Price (Last 2 Years)")
 plt.xlabel("Date"); plt.ylabel("Close (USD)")
 plt.legend(); plt.show()
+
 ```
 
 ---
@@ -156,8 +192,11 @@ else:
 def mape(a, f):
     return np.mean(np.abs((a - f) / a)) * 100
 
+mse  = mean_squared_error(y_true, y_pred)
+rmse = np.sqrt(mse)
+
 print("MAE :", mean_absolute_error(y_true, y_pred))
-print("RMSE:", mean_squared_error(y_true, y_pred, squared=False))
+print("RMSE:", rmse)
 print("MAPE: %.2f%%" % mape(y_true, y_pred))
 
 # 시각화
