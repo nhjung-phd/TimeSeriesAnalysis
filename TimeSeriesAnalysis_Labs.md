@@ -102,6 +102,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 다중공선성 | | [`32_Multicollinearity.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/32_Multicollinearity.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/32_Multicollinearity.ipynb) |
 
 
+## **🗂 실습 33: 추가자료**  
+| 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 실행 |
+| 공공데이터시계열분석 |[`33_Seoul_Air_Quality_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/33_Seoul_Air_Quality_prompt.md) | [`33_seoul_air_quality_timeseries_app.py`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/streamlit/33_seoul_air_quality_timeseries_app.py) | streamlit run seoul_air_quality_timeseries_app.py|
+
 ---
 
 
