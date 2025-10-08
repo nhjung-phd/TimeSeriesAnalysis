@@ -45,6 +45,12 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 가격 데이터 수집 | [`00_pricedata_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/00_pricedata_prompt.md) | [`00_pricedata.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_pricedata.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_pricedata.ipynb) |[![Run R in Colab](https://img.shields.io/badge/Run-R%20in%20Colab-276DC3?logo=r&logoColor=white)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/R/00_pricedata_R.ipynb) |
 | 데이터 전처리 | [`00_data_preprocessing_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/00_data_preprocessing_prompt.md) | [`00_data_preprocessing.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) |[![Run R in Colab](https://img.shields.io/badge/Run-R%20in%20Colab-276DC3?logo=r&logoColor=white)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/R/00_data_preprocessing_R.ipynb) |
 
+## **🗂 실습 00: 시계열의 기초*  
+| 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 파이썬 |▶️ R |
+|-------------|--------------------------|--------------------------|----------|----------|
+| 이동평균,지수평활|  | [`00_MA_SES.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_MA_SES.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_MA_SES.ipynb) | |
+| 요소분해 | | [`00_STL_Decomposition.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_STL_Decomposition.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_STL_Decomposition.ipynb) | |
+
 
 ## **🗂 실습 01~06: 시계열 예측 (고전적 접근)**  
 | 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 파이썬 |▶️ R |
