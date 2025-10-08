@@ -33,7 +33,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 │── 📂 data                     # 실습에 사용할 데이터셋
 │── 📂 notebooks                # Jupyter Notebook 파이썬 실습 코드
 │── 📂 prompts                  # GPT 프롬프트 모음
-│── 📂 R.                       # Jupyter Notebook R 실습 코드
+│── 📂 R                        # Jupyter Notebook R 실습 코드
 │── 📂 models                   # 저장된 모델 파일
 │── README.md                   # 초기 안내 파일
 │── requirements.txt            # 패키지 설치 파일
