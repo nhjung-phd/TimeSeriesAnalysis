@@ -120,6 +120,12 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 |-------------|--------------------------|--------------------------|----------|
 | 공공데이터시계열분석 |[`33_Seoul_Air_Quality_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/33_Seoul_Air_Quality_prompt.md) | [`33_seoul_air_quality_timeseries_app.py`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/streamlit/33_seoul_air_quality_timeseries_app.py) | streamlit run seoul_air_quality_timeseries_app.py|
 
+## **🗂 실습 : Nocode Tool료**  
+| 실습 주제 | 실습파일| 데이터|
+|-------------|--------------------------|--------------------------|
+| Orange | 오렌지실습파일 |테슬라주가|
+
+
 ---
 
 
