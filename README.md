@@ -1,7 +1,7 @@
 # TimeSeriesAnalysis
 ## 🕒 Time Series Analysis with Python 
 
-🚀 **2025년 aSSIST AI·Big Data 석사과정 강의 실습 자료**  
+🚀 **2026년 aSSIST AI·Big Data 석사과정 강의 실습 자료**  
 
 이 저장소는 **"Time Series Analysis (시계열 분석)"** 강의의 실습 자료를 포함하고 있으며,  
 Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록 구성되었습니다.  
@@ -15,14 +15,16 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 ---
 
 ## 📌 강의 개요  
- 🤓 2025년 3월 AI·빅데이터 석사(재학생반)  
- 🚀 **2025년 aSSIST AI·Big Data 석사과정 강의 실습 자료**  
+ 🤓 2026년 3월 AI·빅데이터 석사(재학생반)  
+ 🚀 **2026년 aSSIST AI·Big Data 석사과정 강의 실습 자료**  
 
 ## 📌 📆 학기별 공지사항  
  🔹 **[📖 2025년 1학기 공지](docs/2025-1st.md)**  
 🔹 **[📘 2025년 1학기 강의계획서 및 과제 안내](docs/TimeSeriesAnalysis_Syllabus_2025_04.md)**  
  🔹 **[📖 2025년 2학기 공지](docs/2025-2nd.md)**  
 🔹 **[📘 2025년 2학기 강의계획서 및 과제 안내](docs/TimeSeriesAnalysis_Syllabus_2025_10.md)**  
+ 🔹 **[📖 2026년 1학기 공지](docs/2026-1st.md)**  
+🔹 **[📘 2026년 1학기 강의계획서 및 과제 안내](docs/TimeSeriesAnalysis_Syllabus_2026_03.md)**  
 
 
 ✅ 본 강의는 **시계열 분석(Time Series Analysis)** 에 대한 심층적인 이해와 실습을 목표로 합니다.  
