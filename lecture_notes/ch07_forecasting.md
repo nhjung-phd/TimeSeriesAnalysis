@@ -1,1 +1,141 @@
-Chapter 7. 예측, 백테스트, 성능평가
+# Chapter 7. 예측, 백테스트, 성능평가
+
+<p><strong>Recommended Week:</strong> Week 7</p>
+<p><strong>Notebook:</strong> <code>07_Forecasting_and_Evaluation.ipynb</code></p>
+
+## Learning Objectives
+
+- 표본 내(In-sample) 적합과 표본 외(Out-of-sample) 예측의 근본적인 차이를 이해하고, 과적합(Overfitting)의 위험성을 설명할 수 있다.
+- 시계열 데이터의 시간적 순서를 유지하는 백테스트 기법인 롤링 윈도우(Rolling window)와 확장 윈도우(Expanding window) 기반의 전진 검증(Walk-forward validation)을 구현할 수 있다.
+- 예측 오차를 정량화하는 주요 성능 평가지표(MAE, RMSE, MAPE 등)의 수학적 의미와 한계점을 파악한다.
+- 베이스라인(Baseline) 모델과의 비교를 통해 자신이 개발한 복잡한 시계열 모델의 실무적 유용성을 객관적으로 검증할 수 있다.
+
+## 1. Opening
+
+과거를 완벽하게 기억하는 사람이 미래를 완벽하게 예측할 수 있을까? 통계와 머신러닝의 세계에서 이 질문에 대한 대답은 단호한 “아니오”이다. 과거의 데이터에 모델을 완벽하게 맞추는 것, 즉 과적합은 지나치게 복잡한 수식으로 어제까지의 정답을 외우는 것과 같다.
+
+시계열 분석의 진정한 가치는 과거의 패턴을 해석하는 것을 넘어, 한 번도 관측된 적 없는 불확실한 미래에서 얼마나 잘 작동하는지를 증명하는 데 있다. 이를 위해 우리는 모델을 혹독한 시험대에 올려야 한다. 과거의 특정 시점으로 돌아가 마치 내일을 모르는 것처럼 모델을 학습시키고, 실제 벌어진 일과 예측값을 비교하는 과정이 필요하다. 이 장에서는 시간의 흐름을 거스르지 않고 모델의 진짜 실력을 평가하는 시계열 백테스트(Backtesting)와 성능 평가 지표를 다룬다.
+
+## 2. Why This Topic Matters
+
+현업에서 경영진이 분석가에게 묻는 것은 “이 모델이 과거 데이터를 얼마나 잘 설명하는가”가 아니라, “이 모델을 믿고 다음 달 재고를 발주해도 되는가”이다.
+
+일반적인 횡단면 데이터 분석에서는 데이터를 무작위로 섞어 훈련(Train)과 테스트(Test) 세트로 나누는 교차 검증(K-Fold Cross Validation)을 사용한다. 그러나 시계열 데이터에서 순서를 무작위로 섞는 것은 미래의 정보로 과거를 예측하는 치명적인 데이터 누수(Information Leakage)를 발생시킨다. 따라서 시간의 순서를 엄격히 지키면서 미래 예측 성능을 평가하는 전진 검증(Walk-forward validation) 절차와, 모델의 오차를 비즈니스 언어로 번역해 주는 MAPE, RMSE 등의 지표를 명확히 이해하는 것은 분석의 신뢰성을 담보하는 필수적인 방어선이다.
+
+## 3. Core Concepts
+
+### 3.1 In-sample 적합과 Out-of-sample 예측
+
+- <strong>표본 내 적합 (In-sample Fit)</strong>: 모델의 파라미터를 추정하기 위해 사용된 훈련 데이터 자체를 모델이 얼마나 잘 설명하는지를 의미한다. 잔차(Residual) 분석이 여기에 해당한다.
+- <strong>표본 외 예측 (Out-of-sample Forecast)</strong>: 모델 학습에 전혀 사용되지 않은 미래의 새로운 데이터(Test set)에 대해 모델이 수행한 예측이다. 진정한 예측 성능은 오직 표본 외 예측을 통해서만 평가할 수 있다.
+
+### 3.2 시간순 데이터 분할 (Chronological Split)
+
+시계열 데이터는 반드시 시간의 흐름에 따라 앞부분을 훈련 세트(Training set)로, 뒷부분을 테스트 세트(Test set)로 나누어야 한다. 보통 전체 데이터의 80%를 학습에, 가장 최근의 20%를 테스트에 할당한다.
+
+### 3.3 전진 검증 (Walk-forward Validation)
+
+미래로 나아가며 모델을 반복적으로 평가하는 시계열 특화 교차 검증 방식이다. 예측 기준점(Forecasting origin)을 시간 축을 따라 앞으로 굴려가며 평가한다고 하여 Rolling forecasting origin 기법이라고도 부른다.
+
+1. <strong>확장 윈도우 (Expanding Window)</strong>: 예측 기준점이 이동할 때마다 과거의 모든 데이터를 훈련 세트에 계속 누적하여 포함시키는 방식이다.
+2. <strong>롤링 윈도우 (Rolling Window / Sliding Window)</strong>: 훈련 세트의 고정된 길이(예: 최근 1년)를 유지한 채, 창문을 밀듯이 과거의 오래된 데이터를 버리고 새로운 데이터를 포함시키며 학습하는 방식이다.
+
+### 3.4 베이스라인 모델 (Baseline Models)
+
+복잡한 ARIMA나 딥러닝 모델의 성능이 실제로 좋은지 판단하려면 비교 대상이 필요하다.
+
+- <strong>단순 예측 (Naive)</strong>: 내일의 값은 오늘의 값과 같다고 예측한다.
+- <strong>계절성 단순 예측 (Seasonal Naive)</strong>: 내일의 값은 작년 같은 날 또는 직전 같은 시즌의 값과 같다고 예측한다.
+- <strong>평균 예측 (Mean)</strong>: 과거 모든 데이터의 평균을 미래의 값으로 예측한다.
+
+우리가 개발한 모델은 반드시 이 단순한 베이스라인들의 오차보다 작은 오차를 내야만 실무적 도입 가치를 가진다.
+
+## 4. Mathematical Formulation
+
+특정 시점 <code>T</code>에서 <code>h</code> 시점 앞의 미래를 예측한 값을 <code>ŷ<sub>T+h|T</sub></code>라고 하고, 실제 관측된 값을 <code>y<sub>T+h</sub></code>라고 할 때, 예측 오차(Forecast Error)는 다음과 같이 정의된다.<br><br>
+
+<code>e<sub>T+h</sub> = y<sub>T+h</sub> - ŷ<sub>T+h|T</sub></code><br><br>
+
+테스트 세트의 크기가 <code>N</code>일 때 주요 평가 지표는 다음과 같다.
+
+### 4.1 MAE (Mean Absolute Error, 평균 절대 오차)
+
+<code>MAE = (1/N) × Σ |y<sub>i</sub> - ŷ<sub>i</sub>|</code><br><br>
+
+오차의 절대값을 평균 낸 것으로, 직관적으로 해석하기 쉽고 이상치(Outlier)에 상대적으로 덜 민감하다.
+
+### 4.2 RMSE (Root Mean Squared Error, 평균 제곱근 오차)
+
+<code>RMSE = sqrt[(1/N) × Σ (y<sub>i</sub> - ŷ<sub>i</sub>)²]</code><br><br>
+
+오차를 제곱하여 평균 낸 뒤 제곱근을 씌운 값이다. 큰 오차에 더 무거운 페널티를 부여하므로, 치명적인 예측 실패를 방지해야 할 때 유용하다.
+
+### 4.3 MAPE (Mean Absolute Percentage Error, 평균 절대 백분율 오차)
+
+<code>MAPE = (100/N) × Σ |(y<sub>i</sub> - ŷ<sub>i</sub>) / y<sub>i</sub>|</code><br><br>
+
+오차를 실제 관측치 대비 백분율(%)로 환산한 지표이다. 데이터의 단위(Scale)에 독립적이어서 서로 다른 시계열의 예측 성능을 비교할 때 널리 쓰인다. 다만 <code>y<sub>i</sub></code>가 0이거나 0에 가까우면 값이 무한대로 발산할 수 있다는 한계가 있다.
+
+## 5. Visual Intuition
+
+백테스트와 성능 평가를 시각적으로 이해하기 위해 두 가지 그림을 떠올려 보자.
+
+1. <strong>블록 분할 다이어그램 (Validation Split Diagram)</strong>  
+   가로축을 시간으로 할 때, 파란색 블록(훈련 세트)이 있고 그 바로 오른쪽에 빨간색 블록(테스트 세트)이 1칸 위치한다. 다음 행에서는 파란색 블록이 한 칸 더 늘어나거나(확장 윈도우), 일정 길이를 유지한 채 앞으로 이동하고(롤링 윈도우), 빨간색 블록도 미래로 한 칸 이동한다. 이 계단식 구조가 전진 검증(Walk-forward validation)의 핵심을 보여준다.
+
+2. <strong>실제값 vs 예측값 플롯 (Actual vs. Predicted Plot)</strong>  
+   하나의 그래프 안에 테스트 세트 구간의 실제 데이터(실선)와 모델의 예측값(점선 또는 다른 색상의 선), 그리고 베이스라인 예측값을 겹쳐 그린다. 두 선이 많이 겹칠수록 성능이 우수한 모델로 해석할 수 있다.
+
+## 6. Python Practice
+
+### 6.1 Data
+
+실습에서는 소매점의 주간 유동인구(Foot traffic) 데이터나, 주식의 일일 종가 데이터(예: GOOGL)를 활용한다. 이 데이터들은 추세, 무작위성, 때로는 계절성까지 포함하고 있어 백테스트를 수행하기에 적합하다.
+
+### 6.2 Code Walkthrough
+
+<code>07_Forecasting_and_Evaluation.ipynb</code> 노트북에서는 <code>rolling_forecast</code>라는 사용자 정의 함수를 구현하는 방식을 다룬다.
+
+- 처음 <code>train_size</code>만큼의 데이터를 훈련 세트로 잡고 모델을 적합한다.
+- 다음 1스텝 또는 <code>h</code>스텝 미래를 예측하여 결과 리스트에 저장한다.
+- 실제 관측값이 발생하면 이를 훈련 세트에 업데이트하고, 다시 모델을 갱신하여 그다음 미래를 예측하는 <code>for</code> 루프 구조를 작성한다.
+- <code>sklearn.metrics</code>의 <code>mean_absolute_error</code>와 <code>mean_squared_error</code> 함수를 호출하여 예측값과 실제 테스트 세트 값을 비교한다.
+
+### 6.3 What to Observe
+
+수강생은 전체 데이터를 한 번만 피팅해서 먼 미래를 예측했을 때의 오차 지표와, 새로운 데이터가 도착할 때마다 모델을 업데이트하는 롤링 예측(Rolling forecast)을 수행했을 때의 오차 지표가 얼마나 달라지는지 관찰해야 한다. 많은 경우 롤링 예측의 MAPE가 더 낮게 도출되며, 이는 현실적 예측 상황에 더 가깝기 때문이다.
+
+## 7. Interpretation of Results
+
+도출된 평가지표는 비즈니스 상황에 맞게 해석되어야 한다.
+
+- 만약 어떤 시계열 예측 모델의 MAPE가 15.6%로 계산되었다면, 이는 “우리 모델의 예측값이 실제 값과 평균적으로 약 15.6% 정도의 편차를 가진다”는 뜻이다.
+- 결과 해석 시 가장 중요한 것은 <strong>베이스라인 모델과의 비교</strong>이다. 만약 복잡한 ARIMA 모델의 MAPE가 12%인데, 단순히 어제 값을 오늘 값으로 찍는 Naive 예측의 MAPE가 11%라면, 우리는 복잡한 모델을 채택할 이유가 약해진다. 모델의 우수성은 평가지표의 절대값보다 베이스라인 대비 오차 감소 여부로 검증되어야 한다.
+
+## 8. Common Mistakes
+
+- <strong>훈련 세트의 오차로 성능을 과시하는 오류</strong>: 모델 적합 후 도출되는 여러 요약 지표는 대부분 표본 내(In-sample) 지표이다. 이를 모델의 예측 성능으로 착각하고 보고하는 것은 시계열 분석에서 매우 흔하고도 치명적인 실수이다.
+- <strong>미래 정보의 참조 (Information Leakage)</strong>: 이동평균을 계산하거나 결측치를 보간할 때 중앙 정렬(<code>center=True</code>)을 사용하거나, 전체 데이터를 대상으로 스케일링을 수행하면 테스트 세트의 정보가 훈련 세트로 스며들어 백테스트 결과를 왜곡할 수 있다.
+- <strong>MAPE의 남용</strong>: 수요 예측 등에서 실제값이 0인 시점이 존재할 경우 분모가 0이 되어 MAPE 값이 크게 왜곡될 수 있다. 이 경우 MAE를 사용하거나 sMAPE, MASE와 같은 대안 지표를 고려해야 한다.
+
+## 9. Summary
+
+시계열 모델링의 최종 목적은 과거의 설명이 아니라 불확실한 미래에 대한 신뢰할 수 있는 예측이다. 이를 검증하기 위해 우리는 데이터를 시간 순서대로 훈련과 테스트 세트로 분할하고, 확장 또는 롤링 윈도우를 사용하는 전진 검증(Walk-forward validation)을 통해 실전과 유사한 환경에서 모델을 백테스트해야 한다. 모델의 성능은 MAE, RMSE, MAPE 등의 객관적 지표로 정량화되며, 이 값들은 반드시 평균 예측이나 Naive 예측과 같은 베이스라인 모델의 지표와 비교되어야 한다. 과적합을 피하고 진정한 예측력을 확보하는 이 평가 절차는 모든 데이터 분석 프로젝트의 성패를 가르는 중요한 단계이다.
+
+## 10. Exercises
+
+1. <strong>개념 문제:</strong> 일반적인 기계학습에서 널리 쓰이는 K-Fold 교차 검증을 시계열 데이터에 그대로 적용하면 안 되는 수학적, 논리적 이유를 시간 의존성의 관점에서 설명하시오.
+
+2. <strong>해석 문제:</strong> 어떤 회사의 주간 매출액을 예측하기 위해 두 모델을 비교했다. Model A는 MAE가 100, RMSE가 300이고, Model B는 MAE가 120, RMSE가 150이다. 이 두 모델의 예측 특성이 어떻게 다른지 설명하고, 만약 “가끔 발생하는 엄청나게 큰 오차”를 피하는 것이 가장 중요한 목표라면 어떤 모델을 선택해야 하는지 논리적으로 서술하시오.
+
+3. <strong>간단한 실습 문제:</strong> 실습 노트북에 제공된 데이터를 활용하여 전체 데이터의 80%를 훈련 세트로 분할하시오. 테스트 세트에 대하여  
+   ① 평균값을 예측하는 베이스라인 모델,  
+   ② 마지막 관측치를 예측하는 Naive 모델  
+   의 예측값을 각각 생성하고, 각 모델의 MAPE를 파이썬 코드로 계산하여 비교하시오.
+
+## 11. Further Reading / References
+
+- Hyndman, R. J., & Athanasopoulos, G. (2018). *Forecasting: Principles and Practice (2nd ed.)*. OTexts.
+- Peixeiro, M. (2022). *Time Series Forecasting in Python*. Manning Publications.
+- Hamilton, J. D. (1994). *Time Series Analysis*. Princeton University Press.
+- 정낙현. (2026). *Time Series Analysis 3: 시계열 분석 응용 - 딥러닝*.
