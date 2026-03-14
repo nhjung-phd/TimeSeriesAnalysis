@@ -1,8 +1,3 @@
-좋습니다. 아래는 앞선 형식과 동일하게, **강조는 `<strong>...</strong>`**, 수식과 첨자 표기는 **`<code>...</code>` + `<sub>`** 형식으로 다시 정리한 버전입니다.
-
----
-
-````md
 # Chapter 10. 공적분과 장기균형 관계
 
 <p><strong>Recommended Week:</strong> Week 11</p>
@@ -148,8 +143,3 @@ VECM의 결과를 해석하는 것은 매우 흥미로운 통찰을 제공한다
 * Hamilton, J. D. (1994). *Time Series Analysis*. Princeton University Press.
 * Johansen, S. (1988). *Statistical Analysis of Cointegration Vectors*. *Journal of Economic Dynamics and Control*, 12, 231–254.
 * 정낙현. (2026). *Time Series Analysis 5: 시계열 분석 추가2 강의안*.
-
-```
-
-원하시면 다음 장도 같은 형식으로 이어서 정리해드리겠습니다.
-```
