@@ -1,7 +1,7 @@
 # Chapter 2. 시계열 데이터의 구조와 시각화
 
-**Recommended Week:** Week 2  
-**Notebook:** `00_data_preprocessing.ipynb`, `02_TimeSeries_Decomposition.ipynb`
+<p><strong>Recommended Week:</strong> Week 2</p>
+<p><strong>Notebook:</strong> <code>00_data_preprocessing.ipynb</code>, <code>02_TimeSeries_Decomposition.ipynb</code></p>
 
 ## Learning Objectives
 
@@ -85,14 +85,14 @@
 
 ### 4.1 이동평균
 
-구간 길이를 `k`라고 할 때, 시점 `t`에서의 이동평균은 주변 값들의 평균으로 계산된다.
+구간 길이를 <code>k</code>라고 할 때, 시점 <code>t</code>에서의 이동평균은 주변 값들의 평균으로 계산된다.<br><br>
 
-`ŷ_t = (1/k) × Σ y_(t-i)`
+<code>MA<sub>t</sub> = (1/k) × Σ y<sub>t-i</sub></code><br><br>
 
 보다 구체적으로는, 후행 이동평균의 개념을 다음처럼 이해할 수 있다.
 
-- 현재 시점의 평활값 `ŷ_t`는
-- 최근 `k`개 관측값의 평균이다.
+- 현재 시점의 평활값은 <code>MA<sub>t</sub></code>이다.
+- 이는 최근 <code>k</code>개 관측값의 평균이다.
 - 즉, 현재값 하나만 보는 대신 최근 구간 전체를 함께 본다.
 
 이 식은 현재 시점의 값을 과거 여러 시점의 평균으로 부드럽게 만드는 방식이다. 실무에서는 보통 과거 정보만 활용하는 후행 이동평균이 더 많이 사용된다.
@@ -101,15 +101,15 @@
 
 시계열 분해는 원시 데이터를 추세, 계절성, 잔차로 나누는 과정이다. 대표적으로 두 가지 형태가 있다.
 
-<strong>가법 모형(additive model)</strong>
+<strong>가법 모형(additive model)</strong><br><br>
 
-`Y_t = T_t + S_t + R_t`
+<code>Y<sub>t</sub> = T<sub>t</sub> + S<sub>t</sub> + R<sub>t</sub></code><br><br>
 
 이는 데이터 수준이 달라져도 계절성의 진폭이 거의 일정할 때 적합하다.
 
-<strong>승법 모형(multiplicative model)</strong>
+<strong>승법 모형(multiplicative model)</strong><br><br>
 
-`Y_t = T_t × S_t × R_t`
+<code>Y<sub>t</sub> = T<sub>t</sub> × S<sub>t</sub> × R<sub>t</sub></code><br><br>
 
 이는 시계열 수준이 커질수록 계절적 진폭도 함께 커질 때 적합하다.
 
@@ -133,14 +133,14 @@
 
 이 장의 실습에서는 두 가지 유형의 데이터를 사용할 수 있다.
 
-첫째, <strong>주가 데이터</strong>이다. 주가와 거래량은 시계열의 변동성과 이상치를 관찰하기에 좋다.  
+첫째, <strong>주가 데이터</strong>이다. 주가와 거래량은 시계열의 변동성과 이상치를 관찰하기에 좋다.<br>
 둘째, <strong>계절성이 뚜렷한 데이터</strong>이다. 예를 들어 항공 여객 수, 월별 판매량, 계절성 수요 데이터는 추세와 계절성을 분해하는 데 적합하다.
 
 강의 운영상 하나의 흐름으로 통일하려면, 실습 예제는 <strong>주가 데이터 + 계절성 예제 데이터 한 종류</strong> 정도로 단순화하는 것이 좋다.
 
 ### 6.2 Code Walkthrough
 
-`00_data_preprocessing.ipynb`에서는 다음 내용을 다룬다.
+<code>00_data_preprocessing.ipynb</code>에서는 다음 내용을 다룬다.
 
 - 날짜 컬럼을 Datetime 형식으로 변환하기
 - 시간을 인덱스로 설정하기
@@ -148,7 +148,7 @@
 - 결측치를 보간으로 처리하기
 - 이동평균과 롤링 표준편차를 계산하기
 
-`02_TimeSeries_Decomposition.ipynb`에서는 다음 내용을 다룬다.
+<code>02_TimeSeries_Decomposition.ipynb</code>에서는 다음 내용을 다룬다.
 
 - 시계열 플롯과 이동평균선 비교
 - 가법 및 승법 분해 수행
