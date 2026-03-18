@@ -55,7 +55,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 ### Chapter 2. 시계열 데이터의 구조와 시각화
 - 부교재 파일: [`ch02_ts_structure.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch02_ts_structure.md)
-- 부교재 실습 파일 1: [`00_data_preprocessing.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/00_data_preprocessing.ipynb)
+- 부교재 실습 파일 1: [`01_Time_data_preprocessing.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/01_Time_data_preprocessing.ipynb)
 - 부교재 실습 파일 2: [`02_TimeSeries_Decomposition.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/02_TimeSeries_Decomposition.ipynb)
 - 주제: 시간 인덱스, 빈도, 결측치·이상치, 분해와 시각화
 
