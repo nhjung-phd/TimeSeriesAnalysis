@@ -240,12 +240,12 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 |-------------|--------------------------|--------------------------|----------|
 | 공공데이터시계열분석 |[`33_Seoul_Air_Quality_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/33_Seoul_Air_Quality_prompt.md) | [`33_seoul_air_quality_timeseries_app.py`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/streamlit/33_seoul_air_quality_timeseries_app.py) | streamlit run seoul_air_quality_timeseries_app.py|
 
-## **🗂 실습 40~41: 평가지표**  
+## **🗂 실습 40~42: 평가지표**  
 | 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 실행 |
 |-------------|--------------------------|--------------------------|----------|
 | 회귀 평가 지표 (오차 기반 / 설명력 기반) |  | [`40_Regression_Evaluation_Metrics.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/40_Regression_Evaluation_Metrics.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/40_Regression_Evaluation_Metrics.ipynb) |
 | 금융 백테스트 성과 지표 (샤프 / 소르티노 / MDD 등) |  | [`41_Backtest_Performance_Metrics.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/41_Backtest_Performance_Metrics.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/41_Backtest_Performance_Metrics.ipynb) |
-
+| 분류 평가 지표 (Accuracy / Precision / Recall / F1-score / ROC-AUC / Confusion Matrix) |  | [`42_Classification_Evaluation_Metrics.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/42_Classification_Evaluation_Metrics.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/42_Classification_Evaluation_Metrics.ipynb) |
 
 ## **🗂 실습 : Nocode Tool료**  
 | 실습 주제 | 실습파일| 데이터|
