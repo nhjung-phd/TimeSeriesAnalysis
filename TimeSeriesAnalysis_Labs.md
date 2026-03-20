@@ -138,9 +138,11 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 - 주제: GitHub 기반 강의 운영, 재현가능성, 프로젝트 구조화
 
 
+
 ## **🗂 실습 00: 시계열 데이터 수집 및 전처리**  
 | 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 파이썬 |▶️ R |
 |-------------|--------------------------|--------------------------|----------|----------|
+| TSLA 투자성과 분석 |  | [`99_tsla_after_lecture.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/99_tsla_after_lecture.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/99_tsla_after_lecture.ipynb) | |
 | 가격 데이터 수집 | [`00_pricedata_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/00_pricedata_prompt.md) | [`00_pricedata.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_pricedata.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_pricedata.ipynb) |[![Run R in Colab](https://img.shields.io/badge/Run-R%20in%20Colab-276DC3?logo=r&logoColor=white)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/R/00_pricedata_R.ipynb) |
 | 데이터 전처리 | [`00_data_preprocessing_prompt.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/prompts/00_data_preprocessing_prompt.md) | [`00_data_preprocessing.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/00_data_preprocessing.ipynb) |[![Run R in Colab](https://img.shields.io/badge/Run-R%20in%20Colab-276DC3?logo=r&logoColor=white)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/R/00_data_preprocessing_R.ipynb) |
 
