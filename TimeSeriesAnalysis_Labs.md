@@ -44,98 +44,9 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 아래는 강의용 부교재와 부교재 실습 파일을 연결한 인덱스입니다.  
 각 장은 개념 설명용 부교재와, 그 장에 대응되는 실습 노트북으로 구성됩니다.
 
----
-
-## Part I. Foundations of Time Series Analysis
-
-### Chapter 1. 시계열분석이란 무엇인가
-- 부교재 파일: [`ch01_intro_time_series.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch01_intro_time_series.md)
-- 부교재 실습 파일: [`00_Data_Loading_and_Exploration.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/00_Data_Loading_and_Exploration.ipynb)
-- 주제: 시계열 데이터의 정의, 시간 순서의 중요성, 예측·설명·인과의 구분
-
-### Chapter 2. 시계열 데이터의 구조와 시각화
-- 부교재 파일: [`ch02_ts_structure.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch02_ts_structure.md)
-- 부교재 실습 파일 1: [`01_Time_data_preprocessing.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/01_Time_data_preprocessing.ipynb)
-- 부교재 실습 파일 2: [`02_TimeSeries_Decomposition.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/02_TimeSeries_Decomposition.ipynb)
-- 주제: 시간 인덱스, 빈도, 결측치·이상치, 분해와 시각화
-
-### Chapter 3. 정상성, 자기상관, 그리고 백색잡음
-- 부교재 파일: [`ch03_stationarity_acf.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch03_stationarity_acf.md)
-- 부교재 실습 파일: [`03_Stationarity_and_Autocorrelation.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/03_Stationarity_and_Autocorrelation.ipynb)
-- 주제: 정상성, 단위근, 랜덤워크, ACF/PACF, 차분
-
-### Chapter 4. AR, MA, ARMA 모형의 기초
-- 부교재 파일: [`ch04_arma.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch04_arma.md)
-- 부교재 실습 파일: [`04_ARMA_Modeling.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/04_ARMA_Modeling.ipynb)
-- 주제: AR/MA/ARMA 구조, ACF/PACF 해석, 인과성과 가역성
+- [📘 강의 부교재 보기](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/lecture_note.md)
 
 ---
-
-## Part II. Classical Time Series Models
-
-### Chapter 5. ARIMA와 Box–Jenkins 절차
-- 부교재 파일: [`ch05_arima.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch05_arima.md)
-- 부교재 실습 파일: [`05_ARIMA_forecasting.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/05_ARIMA_forecasting.ipynb)
-- 주제: ARIMA 모형, 식별·추정·진단·예측, auto_arima, Ljung-Box 검정
-
-### Chapter 6. 계절성과 SARIMA
-- 부교재 파일: [`ch06_sarima.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch06_sarima.md)
-- 부교재 실습 파일: [`06_SARIMA_Modeling.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/06_SARIMA_Modeling.ipynb)
-- 주제: 계절성, 계절 차분, SARIMA 구조, 계절 데이터 예측
-
-### Chapter 7. 예측, 백테스트, 성능평가
-- 부교재 파일: [`ch07_forecasting.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch07_forecasting.md)
-- 부교재 실습 파일: [`07_Forecasting_and_Evaluation.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/07_Forecasting_and_Evaluation.ipynb)
-- 주제: 시계열 예측 절차, walk-forward validation, MAPE/RMSE 등 평가 지표
-
----
-
-## Part III. Multivariate Time Series and Structural Analysis
-
-### Chapter 8. 다변량 시계열과 VAR
-- 부교재 파일: [`ch08_var.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch08_var.md)
-- 부교재 실습 파일 1: [`08_VAR_forecasting.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/08_VAR_forecasting.ipynb)
-- 부교재 실습 파일 2: [`08_SVAR_forecasting.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/08_SVAR_forecasting.ipynb)
-- 주제: VAR 모형, 상호작용 구조, 다변량 예측
-
-### Chapter 9. Granger 인과성, 충격반응, 분산분해
-- 부교재 파일: [`ch09_granger.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch09_granger.md)
-- 부교재 실습 파일: [`09_GrangerCausality_VAR.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/09_GrangerCausality_VAR.ipynb)
-- 주제: Granger causality, impulse response, FEVD
-
-### Chapter 10. 공적분과 장기균형 관계
-- 부교재 파일: [`ch10_cointegration.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch10_cointegration.md)
-- 부교재 실습 파일: [`10_Cointegration_and_VECM.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/10_Cointegration_and_VECM.ipynb)
-- 주제: 공적분, 장기균형, 오차수정모형(ECM/VECM)
-
-### Chapter 11. 구조변화, 이상치, 개입분석
-- 부교재 파일: [`ch11_breaks.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch11_breaks.md)
-- 부교재 실습 파일: [`11_StructuralBreaks_and_Intervention.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/11_StructuralBreaks_and_Intervention.ipynb)
-- 주제: structural breaks, 이상치, intervention analysis
-
----
-
-## Part IV. Advanced Topics and Applications
-
-### Chapter 12. 시계열 인과추론 입문
-- 부교재 파일: [`ch12_causal_ts.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch12_causal_ts.md)
-- 부교재 실습 파일: [`12_causal_time_series_intro.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/12_causal_time_series_intro.ipynb)
-- 주제: interrupted time series, comparative ITS, 정책효과 분석, 시계열 인과추론의 기초
-
-### Chapter 13. 머신러닝과 딥러닝 기반 시계열의 개요
-- 부교재 파일: [`ch13_ml_dl.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch13_ml_dl.md)
-- 부교재 실습 파일: [`13_ML_DL_Forecasting.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/13_ML_DL_Forecasting.ipynb)
-- 주제: ML/DL 기반 시계열 예측, lag feature, MLP, LSTM, 전통 모형과의 비교
-
-### Chapter 14. 금융·경영·환경 데이터 응용
-- 부교재 파일: [`ch14_applications.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch14_applications.md)
-- 부교재 실습 파일: [`14_Domain_Specific_Applications.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/notebooks/14_Domain_Specific_Applications.ipynb)
-- 주제: 주가·매출·수요·환경 데이터 등 도메인별 시계열 응용
-
-### Chapter 15. 재현 가능한 시계열분석과 GitHub 운영
-- 부교재 파일: [`ch15_github.md`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/lecture_notes/ch15_github.md)
-- 부교재 실습 파일: 추후 추가 예정
-- 주제: GitHub 기반 강의 운영, 재현가능성, 프로젝트 구조화
 
 
 
@@ -255,6 +166,10 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | Orange | [오렌지실습파일](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/Orange_ARIMA.ows)|[테슬라주가1](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/TSLA_close.csv) [테슬라주가2](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/TSLA_close_all.csv)|
 
 
+## **🗂 실습 : 학생 우수 사례**
+| 작성자 | 실습 주제 | 실습 파일 | ▶️ 실행 |
+|-------------|-------------|--------------------------|----------|
+| 유근일 | 대기 중 CO₂ 농도 시계열 예측 | [`Student_TimeSeries_Forecasting_Example_01.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_01.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_01.ipynb) |
 ---
 
 
