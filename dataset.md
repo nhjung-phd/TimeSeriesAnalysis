@@ -65,7 +65,7 @@
    - **링크**: [https://data.oecd.org/](https://data.oecd.org/)
 
 
-** 기타 데이터셋 제공 사이트:**
+**기타 데이터셋 제공 사이트:**
 
 1. **jbrownlee Dataset**:
    - **링크**: [https://github.com/jbrownlee/Datasets/](https://github.com/jbrownlee/Datasets/)
