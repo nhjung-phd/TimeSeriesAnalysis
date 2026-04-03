@@ -63,3 +63,9 @@
 7. **OECD Data**:
    - **설명**: 경제협력개발기구(OECD)에서 제공하는 경제 통계 데이터로, 회원국들의 다양한 시계열 데이터를 제공합니다.
    - **링크**: [https://data.oecd.org/](https://data.oecd.org/)
+
+
+** 기타 데이터셋 제공 사이트:**
+1. ** jbrownlee Dataset **:
+**링크**: [https://github.com/jbrownlee/Datasets/](https://github.com/jbrownlee/Datasets/)
+ 
