@@ -167,9 +167,14 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 
 
 ## **🗂 실습 : 학생 우수 사례**
-| 작성자 | 실습 주제 | 실습 파일 | ▶️ 실행 |
-|-------------|-------------|--------------------------|----------|
-| 유근일 | 대기 중 CO₂ 농도 시계열 예측 | [`Student_TimeSeries_Forecasting_Example_01.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_01.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_01.ipynb) |
+| 작성자 | 실습 주제 | 실습 파일 | ▶️ 실행 | 비고 |
+|-------------|-------------|--------------------------|----------|----------|
+| 유근일 | 대기 중 CO₂ 농도 시계열 예측 | [`Student_TimeSeries_Forecasting_Example_01.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_01.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_01.ipynb) | |
+| 전현철| 기온 시계열 예측 | [`Student_TimeSeries_Forecasting_Example_02.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_02.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_02.ipynb) | |
+| 예병수|미국기준금리,실업률,소비자물가지수 | [`Student_TimeSeries_Forecasting_Example_03.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_03.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_03.ipynb) | |
+| 박성원 | 월별 CO₂ 농도 시계열 예측 | [`Student_TimeSeries_Forecasting_Example_04.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_04.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_04.ipynb) | |
+| 안형석 | 조석데이터예측| [`Student_TimeSeries_Forecasting_Example_05.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_05.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_05.ipynb) |  |
+| 임성빈 | 금가격예측| [`Student_TimeSeries_Forecasting_Example_06.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_06.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/Student_TimeSeries_Forecasting_Example_06.ipynb) |[`gold_historical_data.csv`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/practice/gold_historical_data.csv) |
 ---
 
 
