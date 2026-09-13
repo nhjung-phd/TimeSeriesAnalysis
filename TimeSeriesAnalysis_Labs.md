@@ -177,7 +177,7 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 예측 기반 포트폴리오 최적화 (Forecast → Portfolio Optimization) |  | [`62_Lab2_Forecast_Portfolio_Optimization.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/62_Lab2_Forecast_Portfolio_Optimization.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/62_Lab2_Forecast_Portfolio_Optimization.ipynb) |
 | 예측 불확실성과 강건 의사결정 (Forecast Uncertainty → Robust Decision) |  | [`63_Lab3_Forecast_Uncertainty_Robust_Decision.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/63_Lab3_Forecast_Uncertainty_Robust_Decision.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/63_Lab3_Forecast_Uncertainty_Robust_Decision.ipynb) |
 
-## **🗂 실습 : Nocode Tool료**  
+## **🗂 실습 : Nocode Tool**  
 | 실습 주제 | 실습파일| 데이터|
 |-------------|--------------------------|--------------------------|
 | Orange | [오렌지실습파일](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/Orange_ARIMA.ows)|[테슬라주가1](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/TSLA_close.csv) [테슬라주가2](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/TSLA_close_all.csv)|
