@@ -25,6 +25,8 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 🔹 **[📘 2025년 2학기 강의계획서 및 과제 안내](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/TimeSeriesAnalysis_Syllabus_2025_10.md)**  
  🔹 **[📖 2026년 1학기 공지](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/2026-1st.md)**  
 🔹 **[📘 2026년 1학기 강의계획서 및 과제 안내](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/TimeSeriesAnalysis_Syllabus_2026_03.md)**  
+ 🔹 **[📖 2026년 2학기 공지](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/2026-2nd.md)**  
+🔹 **[📘 2026년 2학기 강의계획서 및 과제 안내](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/TimeSeriesAnalysis_Syllabus_2026_09.md)**  
 
 
 ✅ 본 강의는 **시계열 분석(Time Series Analysis)** 에 대한 심층적인 이해와 실습을 목표로 합니다.  
@@ -82,7 +84,7 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 
 👨‍🏫 **Instructor: 정낙현 박사 (Dr. Jung, Nak Hyun)**  
 
-📧 Email: nhjung.phd@gmail.com
+📧 Email: nhjung@assist.ac.kr
 
 🚀 Created for aSSIST AI·Big Data Master’s Program  
 
