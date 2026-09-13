@@ -160,6 +160,15 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 금융 백테스트 성과 지표 (샤프 / 소르티노 / MDD 등) |  | [`41_Backtest_Performance_Metrics.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/41_Backtest_Performance_Metrics.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/41_Backtest_Performance_Metrics.ipynb) |
 | 분류 평가 지표 (Accuracy / Precision / Recall / F1-score / ROC-AUC / Confusion Matrix) |  | [`42_Classification_Evaluation_Metrics.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/42_Classification_Evaluation_Metrics.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/42_Classification_Evaluation_Metrics.ipynb) |
 
+## **🗂 실습 51~54: 시계열 인과추론**
+
+| 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 실행 |
+|-------------|--------------------------|--------------------------|----------|
+| 단절적 시계열 분석 (ITS) — TSLA S&P 500 편입 효과 |  | [`51_ITS_TSLA_SP500_inclusion.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/51_ITS_TSLA_SP500_inclusion.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/51_ITS_TSLA_SP500_inclusion.ipynb) |
+| 이중차분법 (DiD) — NVDA 주식분할 효과 vs 동종업계 |  | [`52_DiD_NVDA_split_vs_peers.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/52_DiD_NVDA_split_vs_peers.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/52_DiD_NVDA_split_vs_peers.ipynb) |
+| 통제집단합성법 (Synthetic Control) — TSLA S&P 500 편입의 반사실 경로 |  | [`53_SyntheticControl_TSLA_SP500_inclusion.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/53_SyntheticControl_TSLA_SP500_inclusion.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/53_SyntheticControl_TSLA_SP500_inclusion.ipynb) |
+| Causal ML / Meta-Learner — AI Shock 이후 이질적 처치효과 (CATE) |  | [`54_MetaLearner_AI_shock_panel.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/54_MetaLearner_AI_shock_panel.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/54_MetaLearner_AI_shock_panel.ipynb) |
+
 ## **🗂 실습 : Nocode Tool료**  
 | 실습 주제 | 실습파일| 데이터|
 |-------------|--------------------------|--------------------------|
