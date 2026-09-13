@@ -169,6 +169,14 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 통제집단합성법 (Synthetic Control) — TSLA S&P 500 편입의 반사실 경로 |  | [`53_SyntheticControl_TSLA_SP500_inclusion.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/53_SyntheticControl_TSLA_SP500_inclusion.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/53_SyntheticControl_TSLA_SP500_inclusion.ipynb) |
 | Causal ML / Meta-Learner — AI Shock 이후 이질적 처치효과 (CATE) |  | [`54_MetaLearner_AI_shock_panel.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/54_MetaLearner_AI_shock_panel.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/54_MetaLearner_AI_shock_panel.ipynb) |
 
+## **🗂 실습 61~63: 예측에서 의사결정으로**
+
+| 실습 주제 | 프롬프트 파일 | 코드 파일 | ▶️ 실행 |
+|-------------|--------------------------|--------------------------|----------|
+| 예측 기반 재고 의사결정 (Forecast → Inventory Decision) |  | [`61_Lab1_Forecast_Inventory_Decision.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/61_Lab1_Forecast_Inventory_Decision.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/61_Lab1_Forecast_Inventory_Decision.ipynb) |
+| 예측 기반 포트폴리오 최적화 (Forecast → Portfolio Optimization) |  | [`62_Lab2_Forecast_Portfolio_Optimization.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/62_Lab2_Forecast_Portfolio_Optimization.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/62_Lab2_Forecast_Portfolio_Optimization.ipynb) |
+| 예측 불확실성과 강건 의사결정 (Forecast Uncertainty → Robust Decision) |  | [`63_Lab3_Forecast_Uncertainty_Robust_Decision.ipynb`](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/63_Lab3_Forecast_Uncertainty_Robust_Decision.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhjung-phd/TimeSeriesAnalysis/blob/main/notebooks/63_Lab3_Forecast_Uncertainty_Robust_Decision.ipynb) |
+
 ## **🗂 실습 : Nocode Tool료**  
 | 실습 주제 | 실습파일| 데이터|
 |-------------|--------------------------|--------------------------|
