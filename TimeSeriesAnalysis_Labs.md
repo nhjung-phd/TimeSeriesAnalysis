@@ -184,6 +184,8 @@ pip install numpy pandas matplotlib seaborn scikit-learn statsmodels tensorflow 
 | 실습 주제 | 실습파일| 데이터|
 |-------------|--------------------------|--------------------------|
 | Orange | [오렌지실습파일](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/Orange_ARIMA.ows)|[테슬라주가1](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/TSLA_close.csv) [테슬라주가2](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/TSLA_close_all.csv)|
+| Antigravity | [Antigravity실습파일](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/examples/antigravity_task_timeseries_statistical_studio.md)||
+
 
 
 ## **🗂 실습 : 학생 우수 사례**
