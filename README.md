@@ -29,6 +29,21 @@ Python을 활용한 다양한 시계열 분석 기법을 실습할 수 있도록
 🔹 **[📘 2026년 2학기 강의계획서 및 과제 안내](https://github.com/nhjung-phd/TimeSeriesAnalysis/blob/main/docs/TimeSeriesAnalysis_Syllabus_2026_09.md)**  
 
 
+## 🎓 2026년 aSSIST 아고라 강의 안내
+
+🤓 **2026학년도 2·3학기 aSSIST 아고라 — 박사과정 및 대박사과정**  
+📖 **과목명: AI 기반 시계열 연구방법론 (AI-Assisted Time Series Research Methods)**  
+👨‍🏫 **담당교수: 최진희, 정낙현**  
+📆 **강의일: 2026년 11월 8일(일), 11월 15일(일)**  
+⏳ **총 15시간 / 1학점** · 💻 **온라인·오프라인 병행**
+
+🔹 **[📖 2026년 아고라 강의 공지](docs/2026-Agora.md)**  
+🔹 **[📘 2026년 아고라 강의계획서 및 과제 안내](docs/TimeSeriesAnalysis_Syllabus_2026_Agora.md)**
+
+본 강의는 시계열 분석의 기초·통계·AI 예측뿐 아니라 **인과추론(ITS·DID·Synthetic Control), 패널분석(FE·RE), 검증 및 연구설계**를 연결합니다.
+
+---
+
 ✅ 본 강의는 **시계열 분석(Time Series Analysis)** 에 대한 심층적인 이해와 실습을 목표로 합니다.  
 ✅ 🐍 Python을 활용한 시계열 데이터 분석, 머신러닝 및 딥러닝 기반 예측 모델을 다룹니다.  
 
